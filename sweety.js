@@ -33,13 +33,11 @@ function Sweety(){
         }
         this.elements = [];
         if (elem) {
-            // this.elements = elem[1] ? Array.prototype.slice.call(elem) : [elem];
             if (elem.toString() == '[object HTMLCollection]') {
                 this.elements = Array.prototype.slice.call(elem);
             } else {
                 this.elements = [elem];
             }
-            // this.elements = elem[1] ? Array.prototype.slice.call(elem) : [elem];
         }
         return this;
     };
