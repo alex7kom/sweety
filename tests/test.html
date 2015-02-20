@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sweety Tests</title>
+  <link rel="stylesheet" href="../bower_components/mocha/mocha.css" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../sweety.js"></script>
+  <script src="../bower_components/mocha/mocha.js"></script>
+  <script src="../bower_components/should/should.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="test.sweety.js"></script>
+  <script>
+    mocha.checkLeaks();
+    mocha.run();
+  </script>
+</body>
+</html>
