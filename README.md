@@ -53,7 +53,9 @@ $('.class').parent();
 
 You can chain all methods that return Sweety object:
 
+```js
 $('#id').toggleClass('my-class').setAttr('my-attr');
+```
 
 ## Manipulate
 
