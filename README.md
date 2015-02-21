@@ -2,6 +2,8 @@
 
 Small and naive DOM manipulation library. It is only a ~1.5KB when minimized and gzipped!
 
+All modern browsers are supported. IE8 and earlier versions of IE are not supported.
+
 # Use
 
 ## Init
