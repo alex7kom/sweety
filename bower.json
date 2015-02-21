@@ -11,7 +11,6 @@
     "browser"
   ],
   "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -19,6 +18,11 @@
     "test",
     "tests"
   ],
+  "homepage": "https://github.com/Alex7Kom/sweety",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alex7Kom/sweety.git"
+  },
   "devDependencies": {
     "mocha": "~2.1.0",
     "should": "~5.0.0"
