@@ -175,7 +175,10 @@ function Sweety(){
         },
 
         addClass: function (classes) {
-            classes = typeof classes == 'string' ? classes.split(/\s+/) : classes;
+            if (typeof classes == 'string') {
+                classes = classes.split(/\s+/);
+            }
+
             this.forEach(function (elem) {
                 var elemClasses = fn.getClasses(elem);
                 fn.each(classes, function (className) {
@@ -188,7 +191,10 @@ function Sweety(){
             return this;
         },
         removeClass: function (classes) {
-            classes = typeof classes == 'string' ? classes.split(/\s+/) : classes;
+            if (typeof classes == 'string') {
+                classes = classes.split(/\s+/);
+            }
+
             this.forEach(function (elem) {
                 var elemClasses = fn.getClasses(elem);
                 fn.each(classes, function (className) {
