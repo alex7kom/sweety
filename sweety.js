@@ -1,6 +1,4 @@
 function Sweety(){
-    var $d = document,
-        $w = window;
 
     var sweety = function(element){
         return new sweetyElement(element);
@@ -12,7 +10,7 @@ function Sweety(){
             if (element.substr(0, 1) == '<') {
                 elem = fn.create(element);
             } else {
-                elem = fn.find($d, element);
+                elem = fn.find(document, element);
             }
         } else if (typeof element == 'object' && element !== null) {
             elem = element;
@@ -31,7 +29,7 @@ function Sweety(){
     var fn = sweety.fn = {
 
         create: function (html) {
-            var a = $d.createElement('div');
+            var a = document.createElement('div');
             a.innerHTML = html;
             return a.children;
         },
