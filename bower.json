@@ -5,7 +5,7 @@
   "authors": [
     "Alexey Komarov <alex7kom@gmail.com>"
   ],
-  "description": "Small and naive DOM manipulation library",
+  "description": "Small and simple DOM manipulation library",
   "keywords": [
     "DOM",
     "browser"

@@ -1,8 +1,20 @@
 # Sweety.js
 
-Small and naive DOM manipulation library. It is only a ~1.5KB when minimized and gzipped!
+Small and simple DOM manipulation library. It is only a ~1.5KB when minimized and gzipped!
 
 All modern browsers are supported. IE8 and earlier versions of IE are not supported.
+
+__Note__ that it is __not__ a drop-in replacement for jQuery or any other library.
+
+# Installation
+
+Download [the latest version](https://github.com/Alex7Kom/sweety/releases/latest) from Github or use Bower:
+
+```
+bower install sweety
+```
+
+Then just include `sweety.js` or `sweety.min.js` in your html.
 
 # Use
 
