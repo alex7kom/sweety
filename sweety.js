@@ -41,35 +41,15 @@ function Sweety(){
         }
         return this;
     };
-    sweety.fn = sweetyElement.prototype = {
-        toArray: function () {
-            return this.elements;
-        },
 
-        findChild: function (selector) {
-            return sweety(sweetyFind(this.elements[0], selector));
-        },
-        findParent: function (selector) {
-            var elem = this.elements[0];
-            if (!selector) {
-                return this.parent();
-            }
-            if (selector.substr(0,1) == '.') {
-                while( (elem = elem.parentElement) && !this.contains(this.getClasses(elem), selector.substr(1)) );
-            } else {
-                while( (elem = elem.parentElement) && !(elem.tagName.toUpperCase() == selector.toUpperCase()));
-            }
-            return sweety(elem);
-        },
-        parent: function () {
-            return sweety(this.elements[0].parentElement);
-        },
+    var fn = sweety.fn = {
 
         each: function (elems, cb) {
             for (var i = 0, l = elems.length; i < l; i++) {
                 cb(elems[i], i, elems);
             }
         },
+
         objEach: function (elems, cb) {
             for (var i in elems) {
                 if (elems.hasOwnProperty(i)) {
@@ -77,58 +57,9 @@ function Sweety(){
                 }
             }
         },
+
         contains: function (arr, item) {
             return arr.indexOf(item) !== -1;
-        },
-
-        forEach: function(cb) {
-            this.each(this.elements, cb);
-            return this;
-        },
-
-        getAttr: function (key) {
-            return this.elements[0].getAttribute(key);
-        },
-        setAttr: function (key, value) {
-            var attributes = {};
-            if (key.toString() == '[object Object]') {
-                attributes = key;
-            } else {
-                attributes[key] = value;
-            }
-            this.forEach(function (elem) {
-                this.objEach(attributes, function (key, value) {
-                    elem.setAttribute(key, value);
-                });
-            }.bind(this));
-            return this;
-        },
-        removeAttr: function (key) {
-            var attributes = [];
-            if (typeof key == 'object') {
-                attributes = key;
-            } else {
-                attributes.push(key);
-            }
-            this.forEach(function (elem) {
-                this.each(attributes, function(key) {
-                    elem.removeAttribute(key);
-                });
-            }.bind(this));
-            return this;
-        },
-        hasAttr: function (key) {
-            return this.elements[0].hasAttribute(key);
-        },
-        attr: function (key, value) {
-            if (value) {
-                this.setAttr(key, value);
-                return this;
-            }
-            return this.getAttr(key);
-        },
-        val: function (value) {
-            return this.attr('value', value);
         },
 
         getClasses: function (elem) {
@@ -139,44 +70,6 @@ function Sweety(){
         },
         saveClasses: function (elem, elemClasses) {
             elem.className = elemClasses.join(' ');
-        },
-        addClass: function (classes) {
-            classes = typeof classes == 'string' ? classes.split(/\s+/) : classes;
-            this.forEach(function (elem) {
-                var elemClasses = this.getClasses(elem);
-                this.each(classes, function (className) {
-                    if (elemClasses.indexOf(className) === -1) {
-                        elemClasses.push(className);
-                    }
-                });
-                this.saveClasses(elem, elemClasses);
-            }.bind(this));
-            return this;
-        },
-        removeClass: function (classes) {
-            classes = typeof classes == 'string' ? classes.split(/\s+/) : classes;
-            this.forEach(function (elem) {
-                var elemClasses = this.getClasses(elem);
-                this.each(classes, function (className) {
-                    var index = elemClasses.indexOf(className);
-                    if (index !== -1) {
-                        elemClasses.splice(index, 1);
-                    }
-                });
-                this.saveClasses(elem, elemClasses);
-            }.bind(this));
-            return this;
-        },
-        hasClass: function (className) {
-            return this.getClasses(this.elements[0]).indexOf(className) !== -1;
-        },
-        toggleClass: function (className) {
-            if (this.hasClass(className)) {
-                this.removeClass(className);
-            } else {
-                this.addClass(className);
-            }
-            return this;
         },
 
         getStyles: function (elem) {
@@ -197,19 +90,136 @@ function Sweety(){
                 stylesArray.push(styleName + ':' + styleValue);
             });
             elem.style.cssText = stylesArray.join(';');
+        }
+
+    };
+
+    sweetyElement.prototype = {
+
+        toArray: function () {
+            return this.elements;
         },
+
+        findChild: function (selector) {
+            return sweety(sweetyFind(this.elements[0], selector));
+        },
+        findParent: function (selector) {
+            var elem = this.elements[0];
+            if (!selector) {
+                return this.parent();
+            }
+            if (selector.substr(0,1) == '.') {
+                while( (elem = elem.parentElement) && !fn.contains(fn.getClasses(elem), selector.substr(1)) );
+            } else {
+                while( (elem = elem.parentElement) && !(elem.tagName.toUpperCase() == selector.toUpperCase()));
+            }
+            return sweety(elem);
+        },
+        parent: function () {
+            return sweety(this.elements[0].parentElement);
+        },
+
+        forEach: function(cb) {
+            fn.each(this.elements, cb);
+            return this;
+        },
+
+        getAttr: function (key) {
+            return this.elements[0].getAttribute(key);
+        },
+        setAttr: function (key, value) {
+            var attributes = {};
+            if (key.toString() == '[object Object]') {
+                attributes = key;
+            } else {
+                attributes[key] = value;
+            }
+            this.forEach(function (elem) {
+                fn.objEach(attributes, function (key, value) {
+                    elem.setAttribute(key, value);
+                });
+            });
+            return this;
+        },
+        removeAttr: function (key) {
+            var attributes = [];
+            if (typeof key == 'object') {
+                attributes = key;
+            } else {
+                attributes.push(key);
+            }
+            this.forEach(function (elem) {
+                fn.each(attributes, function(key) {
+                    elem.removeAttribute(key);
+                });
+            });
+            return this;
+        },
+        hasAttr: function (key) {
+            return this.elements[0].hasAttribute(key);
+        },
+        attr: function (key, value) {
+            if (value) {
+                this.setAttr(key, value);
+                return this;
+            }
+            return this.getAttr(key);
+        },
+        val: function (value) {
+            return this.attr('value', value);
+        },
+
+        addClass: function (classes) {
+            classes = typeof classes == 'string' ? classes.split(/\s+/) : classes;
+            this.forEach(function (elem) {
+                var elemClasses = fn.getClasses(elem);
+                fn.each(classes, function (className) {
+                    if (elemClasses.indexOf(className) === -1) {
+                        elemClasses.push(className);
+                    }
+                });
+                fn.saveClasses(elem, elemClasses);
+            });
+            return this;
+        },
+        removeClass: function (classes) {
+            classes = typeof classes == 'string' ? classes.split(/\s+/) : classes;
+            this.forEach(function (elem) {
+                var elemClasses = fn.getClasses(elem);
+                fn.each(classes, function (className) {
+                    var index = elemClasses.indexOf(className);
+                    if (index !== -1) {
+                        elemClasses.splice(index, 1);
+                    }
+                });
+                fn.saveClasses(elem, elemClasses);
+            });
+            return this;
+        },
+        hasClass: function (className) {
+            return fn.contains(fn.getClasses(this.elements[0]), className);
+        },
+        toggleClass: function (className) {
+            if (this.hasClass(className)) {
+                this.removeClass(className);
+            } else {
+                this.addClass(className);
+            }
+            return this;
+        },
+
         addStyle: function (style, styleValue) {
             this.forEach(function (elem) {
-                var styles = this.getStyles(elem);
+                var styles = fn.getStyles(elem);
                 if (styleValue) {
                     styles[style] = styleValue;
                 } else if (typeof style === 'object') {
-                    this.objEach(style, function (styleName, styleValue) {
+                    fn.objEach(style, function (styleName, styleValue) {
                         styles[styleName] = styleValue;
                     });
                 }
-                this.saveStyles(elem, styles);
-            }.bind(this));
+                fn.saveStyles(elem, styles);
+            });
             return this;
         },
         removeStyle: function (style) {
@@ -217,12 +227,12 @@ function Sweety(){
                 style = [style];
             }
             this.forEach(function (elem) {
-                var styles = this.getStyles(elem);
-                this.each(style, function (styleItem) {
+                var styles = fn.getStyles(elem);
+                fn.each(style, function (styleItem) {
                     delete styles[styleItem];
                 });
-                this.saveStyles(elem, styles);
-            }.bind(this));
+                fn.saveStyles(elem, styles);
+            });
             return this;
         },
 
@@ -242,7 +252,7 @@ function Sweety(){
 
         append: function (elem) {
             if (elem.toString() === '[SweetyElement]') {
-                this.each(elem.elements, function (item) {
+                fn.each(elem.elements, function (item) {
                     this.elements[0].appendChild(item);
                 }.bind(this));
             } else {
@@ -273,6 +283,8 @@ function Sweety(){
         toString: function () {
             return '[SweetyElement]';
         }
+
     };
+
     return sweety;
 }
