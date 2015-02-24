@@ -104,9 +104,17 @@ function Sweety(){
             return this;
         },
         removeAttr: function (key) {
+            var attributes = [];
+            if (typeof key == 'object') {
+                attributes = key;
+            } else {
+                attributes.push(key);
+            }
             this.forEach(function (elem) {
-                elem.removeAttribute(key);
-            });
+                this.each(attributes, function(key) {
+                    elem.removeAttribute(key);
+                });
+            }.bind(this));
             return this;
         },
         hasAttr: function (key) {

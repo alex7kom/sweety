@@ -171,8 +171,12 @@ describe('Sweety', function (){
       document.getElementById('sweety_test').innerHTML = '';
     });
 
-    it('should remove a given attr', function () {
+    it('should remove a given attr by name from a string', function () {
       ($('#sweety_test_child').removeAttr('test-attr').getAttr('test-attr') === null).should.be.true;
+    });
+
+    it('should remove a given attr by list of names from an array', function () {
+      ($('#sweety_test_child').removeAttr(['test-attr']).getAttr('test-attr') === null).should.be.true;
     });
 
   });

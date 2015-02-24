@@ -73,6 +73,7 @@ $('#id').setAttr({
   'my-attr-2': 'my value 2'
 });
 $('#id').removeAttr('my-attr');
+$('#id').removeAttr(['my-attr', 'my-attr-2']);
 ```
 
 Check if the attribute exists (returns `true` or `false`):
