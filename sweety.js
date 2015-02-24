@@ -90,9 +90,17 @@ function Sweety(){
             return this.elements[0].getAttribute(key);
         },
         setAttr: function (key, value) {
+            var attributes = {};
+            if (key.toString() == '[object Object]') {
+                attributes = key;
+            } else {
+                attributes[key] = value;
+            }
             this.forEach(function (elem) {
-                elem.setAttribute(key, value);
-            });
+                this.objEach(attributes, function (key, value) {
+                    elem.setAttribute(key, value);
+                });
+            }.bind(this));
             return this;
         },
         removeAttr: function (key) {

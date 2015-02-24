@@ -68,6 +68,10 @@ Get, set and remove attributes:
 ```js
 $('#id').getAttr('my-attr');
 $('#id').setAttr('my-attr', 'my value');
+$('#id').setAttr({
+  'my-attr': 'my value',
+  'my-attr-2': 'my value 2'
+});
 $('#id').removeAttr('my-attr');
 ```
 

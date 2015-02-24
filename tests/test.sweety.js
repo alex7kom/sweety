@@ -142,8 +142,18 @@ describe('Sweety', function (){
       document.getElementById('sweety_test').innerHTML = '';
     });
 
-    it('should set a given attr and value', function () {
-      $('#sweety_test_child').setAttr('test-attr', 'test-value').getAttr('test-attr').should.be.eql('test-value');
+    it('should set a given attr and value from a pair of strings', function () {
+      $('#sweety_test_child')
+        .setAttr('test-attr', 'test-value')
+        .getAttr('test-attr').should.be.eql('test-value');
+    });
+
+    it('should set a given attr and value from an object', function () {
+      $('#sweety_test_child')
+        .setAttr({
+          'test-attr': 'test-value'
+        })
+        .getAttr('test-attr').should.be.eql('test-value');
     });
 
   });
