@@ -10,9 +10,7 @@ function Sweety(){
         var elem;
         if (typeof element == 'string' && element.length > 0) {
             if (element.substr(0, 1) == '<') {
-                var a = $d.createElement('div');
-                a.innerHTML = element;
-                elem = a.children;
+                elem = fn.create(element);
             } else {
                 elem = fn.find($d, element);
             }
@@ -31,6 +29,12 @@ function Sweety(){
     };
 
     var fn = sweety.fn = {
+
+        create: function (html) {
+            var a = $d.createElement('div');
+            a.innerHTML = html;
+            return a.children;
+        },
 
         find: function (parent, selector) {
             var elem;
