@@ -1,23 +1,11 @@
 function Sweety(){
     var $d = document,
         $w = window;
+
     var sweety = function(element){
         return new sweetyElement(element);
     };
-    var sweetyFind = function (parent, selector) {
-        var elem;
-        switch (selector.substr(0, 1)) {
-            case '.':
-                elem = parent.getElementsByClassName(selector.substr(1));
-                break;
-            case '#':
-                elem = parent.getElementById(selector.substr(1));
-                break;
-            default:
-                elem = parent.getElementsByTagName(selector);
-        }
-        return elem;
-    };
+
     var sweetyElement = function(element) {
         var elem;
         if (typeof element == 'string' && element.length > 0) {
@@ -26,7 +14,7 @@ function Sweety(){
                 a.innerHTML = element;
                 elem = a.children;
             } else {
-                elem = sweetyFind($d, element);
+                elem = fn.find($d, element);
             }
         } else if (typeof element == 'object' && element !== null) {
             elem = element;
@@ -43,6 +31,21 @@ function Sweety(){
     };
 
     var fn = sweety.fn = {
+
+        find: function (parent, selector) {
+            var elem;
+            switch (selector.substr(0, 1)) {
+                case '.':
+                    elem = parent.getElementsByClassName(selector.substr(1));
+                    break;
+                case '#':
+                    elem = parent.getElementById(selector.substr(1));
+                    break;
+                default:
+                    elem = parent.getElementsByTagName(selector);
+            }
+            return elem;
+        },
 
         each: function (elems, cb) {
             for (var i = 0, l = elems.length; i < l; i++) {
@@ -101,7 +104,7 @@ function Sweety(){
         },
 
         findChild: function (selector) {
-            return sweety(sweetyFind(this.elements[0], selector));
+            return sweety(fn.find(this.elements[0], selector));
         },
         findParent: function (selector) {
             var elem = this.elements[0];
