@@ -246,6 +246,9 @@ function Sweety(){
             });
             return this;
         },
+        css: function (style, styleValue) {
+            return this.addStyle(style, styleValue);
+        },
 
         html: function (html) {
             if (html !== undefined) {

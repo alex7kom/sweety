@@ -530,6 +530,44 @@ describe('Sweety', function (){
 
   });
 
+  describe('.css', function () {
+
+    beforeEach(function () {
+      var elem = document.createElement('div');
+      elem.id = 'sweety_test_child';
+      elem.style.cssText = 'color: black;';
+      document.getElementById('sweety_test').appendChild(elem);
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should add styles from arguments', function () {
+      $('#sweety_test_child').css('text-align', 'right');
+      document.getElementById('sweety_test_child').style.cssText
+        .should.be.eql('color: black; text-align: right;');
+    });
+
+    it('should add styles from an object', function () {
+      $('#sweety_test_child').css({
+        'text-align': 'right',
+        'text-decoration': 'none'
+      });
+      document.getElementById('sweety_test_child').style.cssText
+        .should.be.eql('color: black; text-align: right; text-decoration: none;');
+    });
+
+    it('should not duplicate styles when adding', function () {
+      $('#sweety_test_child').css({
+        color: 'black'
+      });
+      document.getElementById('sweety_test_child').style.cssText
+        .should.be.eql('color: black;');
+    });
+
+  });
+
   describe('.html', function () {
 
     beforeEach(function () {

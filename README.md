@@ -139,6 +139,8 @@ $('#id').addStyle({
 });
 ```
 
+There is also `.css` alias method for `.addStyle` method.
+
 Remove CSS style rules from elements (only affects inline CSS style rules):
 
 ```js
