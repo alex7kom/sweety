@@ -35,6 +35,14 @@ describe('Sweety', function (){
       $('<div>').toArray().length.should.be.eql(1);
     });
 
+    it('should select nothing by empty string', function () {
+      $('').toArray().length.should.be.eql(0);
+    });
+
+    it('should return empty collection without any params', function () {
+      $().toArray().length.should.be.eql(0);
+    });
+
   });
 
   describe('.toArray', function () {
@@ -65,6 +73,10 @@ describe('Sweety', function (){
       $('#sweety_test').findChild('.sweety-test-child').toArray().length.should.be.eql(1);
     });
 
+    it('should return empty collection on empty collection', function () {
+      $().findChild('.sweety-test-child').toArray().length.should.be.eql(0);
+    });
+
   });
 
   describe('.findParent', function () {
@@ -91,6 +103,10 @@ describe('Sweety', function (){
       $('#sweety_test_child').findParent('.sweety-test').toArray().length.should.be.eql(1);
     });
 
+    it('should return empty collection on empty collection', function () {
+      $().findParent('.sweety-test').toArray().length.should.be.eql(0);
+    });
+
   });
 
   describe('.parent', function () {
@@ -107,6 +123,10 @@ describe('Sweety', function (){
 
     it('should return a parent element', function () {
       $('#sweety_test_child').parent().toArray().length.should.be.eql(1);
+    });
+
+    it('should return empty collection on empty collection', function () {
+      $().parent().toArray().length.should.be.eql(0);
     });
 
   });
@@ -126,6 +146,14 @@ describe('Sweety', function (){
 
     it('should return a value of given attr', function () {
       $('#sweety_test_child').getAttr('test-attr').should.be.eql('test-value');
+    });
+
+    it('should return null if attr does not exists', function () {
+      ($('#sweety_test_child').getAttr('test-attr-2') === null).should.be.true;
+    });
+
+    it('should return null if element does not exist', function () {
+      ($().getAttr('test-attr') === null).should.be.true;
     });
 
   });
@@ -156,6 +184,13 @@ describe('Sweety', function (){
         .getAttr('test-attr').should.be.eql('test-value');
     });
 
+    it('should not crash on empty collection', function () {
+      $().setAttr('test-attr', 'test-value');
+      $().setAttr({
+        'test-attr': 'test-value'
+      });
+    });
+
   });
 
   describe('.removeAttr', function () {
@@ -179,6 +214,11 @@ describe('Sweety', function (){
       ($('#sweety_test_child').removeAttr(['test-attr']).getAttr('test-attr') === null).should.be.true;
     });
 
+    it('should not crash on empty collection', function () {
+      $().removeAttr('test-attr');
+      $().removeAttr(['test-attr']);
+    });
+
   });
 
   describe('.hasAttr', function () {
@@ -200,6 +240,10 @@ describe('Sweety', function (){
 
     it('should return false if attr doesn\'t exist', function () {
       $('#sweety_test_child').hasAttr('not-exist').should.be.false;
+    });
+
+    it('should return false if element does not exist', function () {
+      $().hasAttr('test-attr').should.be.false;
     });
 
   });
@@ -339,6 +383,11 @@ describe('Sweety', function (){
         .should.be.eql(['class-1', 'class-2']);
     });
 
+    it('should not crash on empty collection', function () {
+      $().addClass('class-1');
+      $().addClass(['class-1']);
+    });
+
   });
 
   describe('.removeClass', function () {
@@ -369,6 +418,11 @@ describe('Sweety', function (){
         .should.be.eql([]);
     });
 
+    it('should not crash on empty collection', function () {
+      $().removeClass('class-1');
+      $().removeClass(['class-1']);
+    });
+
   });
 
   describe('.hasClass', function () {
@@ -390,6 +444,10 @@ describe('Sweety', function (){
 
     it('should return false if first element doesn\'t have a given class', function () {
       $('#sweety_test_child').hasClass('no-such-class').should.be.false;
+    });
+
+    it('should return false if element does not exist', function () {
+      $().hasClass('class-2').should.be.false;
     });
 
   });
@@ -501,6 +559,13 @@ describe('Sweety', function (){
         .should.be.eql('color: black;');
     });
 
+    it('should not crash on empty collection', function () {
+      $().addStyle('color', 'black');
+      $().addStyle({
+        color: 'black'
+      });
+    });
+
   });
 
   describe('.removeStyle', function () {
@@ -526,6 +591,11 @@ describe('Sweety', function (){
       $('#sweety_test_child').removeStyle(['color', 'text-align']);
       document.getElementById('sweety_test_child').style.cssText
         .should.be.eql('');
+    });
+
+    it('should not crash on empty collection', function () {
+      $().removeStyle('color');
+      $().removeStyle(['color']);
     });
 
   });
@@ -593,6 +663,14 @@ describe('Sweety', function (){
         .should.be.eql('<div id="sweety_test_child_2"></div>');
     });
 
+    it('setter should not crash on empty collection', function () {
+      $().html('<div id="sweety_test_child_2"></div>');
+    });
+
+    it('getter should return undefined on empty collection', function () {
+      ($().html() === undefined).should.be.true;
+    });
+
   });
 
   describe('.empty', function () {
@@ -627,6 +705,15 @@ describe('Sweety', function (){
       $('#sweety_test_child').toArray().length.should.be.eql(1);
     });
 
+    it('should not crash on empty collection', function () {
+      $().append($('<div id="sweety_test_child"></div>'));
+    });
+
+    it('should not crash if passed an empty collection', function () {
+      $('#sweety_test').append();
+      $('#sweety_test').append($());
+    });
+
   });
 
   describe('.remove', function () {
@@ -644,6 +731,11 @@ describe('Sweety', function (){
       $('#sweety_test_child').remove();
       $('#sweety_test_child').toArray().length.should.be.eql(0);
     });
+
+    it('should not crash on empty collection', function () {
+      $().remove();
+    });
+
   });
 
   describe('.toString', function () {

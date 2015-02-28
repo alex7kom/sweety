@@ -106,9 +106,15 @@ function Sweety(){
         },
 
         findChild: function (selector) {
+            if (!this.elements[0]) {
+                return sweety();
+            }
             return sweety(fn.find(this.elements[0], selector));
         },
         findParent: function (selector) {
+            if (!this.elements[0]) {
+                return sweety();
+            }
             var elem = this.elements[0];
             if (!selector) {
                 return this.parent();
@@ -121,6 +127,9 @@ function Sweety(){
             return sweety(elem);
         },
         parent: function () {
+            if (!this.elements[0]) {
+                return sweety();
+            }
             return sweety(this.elements[0].parentElement);
         },
 
@@ -130,6 +139,9 @@ function Sweety(){
         },
 
         getAttr: function (key) {
+            if (!this.elements[0]) {
+                return null;
+            }
             return this.elements[0].getAttribute(key);
         },
         setAttr: function (key, value) {
@@ -161,6 +173,9 @@ function Sweety(){
             return this;
         },
         hasAttr: function (key) {
+            if (!this.elements[0]) {
+                return false;
+            }
             return this.elements[0].hasAttribute(key);
         },
         attr: function (key, value) {
@@ -208,6 +223,9 @@ function Sweety(){
             return this;
         },
         hasClass: function (className) {
+            if (!this.elements[0]) {
+                return false;
+            }
             return fn.contains(fn.getClasses(this.elements[0]), className);
         },
         toggleClass: function (className) {
@@ -257,6 +275,9 @@ function Sweety(){
                 });
                 return this;
             }
+            if (!this.elements[0]) {
+                return undefined;
+            }
             return this.elements[0].innerHTML;
         },
         empty: function () {
@@ -265,6 +286,9 @@ function Sweety(){
         },
 
         append: function (elem) {
+            if (!this.elements[0] || !elem) {
+                return this;
+            }
             if (elem.toString() === '[SweetyElement]') {
                 fn.each(elem.elements, function (item) {
                     this.elements[0].appendChild(item);
