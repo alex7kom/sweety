@@ -1,10 +1,10 @@
 function Sweety(){
 
     var sweety = function(element){
-        return new sweetyElement(element);
+        return new SweetyElement(element);
     };
 
-    var sweetyElement = function(element) {
+    var SweetyElement = function(element) {
         var elem;
         if (typeof element == 'string' && element.length > 0) {
             if (element.substr(0, 1) == '<') {
@@ -99,7 +99,7 @@ function Sweety(){
 
     };
 
-    sweetyElement.prototype = {
+    SweetyElement.prototype = {
 
         toArray: function () {
             return this.elements;
