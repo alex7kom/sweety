@@ -1,4 +1,4 @@
-function Sweety(){
+function Sweety(extensions){
 
     var sweety = function(element){
         return new SweetyElement(element);
@@ -323,6 +323,15 @@ function Sweety(){
         }
 
     };
+
+    if (typeof extensions == 'object') {
+        fn.objEach(extensions, function (name, func) {
+            if (typeof func != 'function') {
+                return;
+            }
+            SweetyElement.prototype[name] = func;
+        });
+    }
 
     return sweety;
 }

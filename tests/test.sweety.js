@@ -802,3 +802,16 @@ describe('Sweety', function (){
   });
 
 });
+
+describe('Extensions', function () {
+  var $ = Sweety({
+    testFunc: function () {
+      return this.elements.length;
+    }
+  });
+
+  it('testFunc should return collection length', function () {
+    $().testFunc().should.be.eql(0);
+    $('<div></div>').testFunc().should.be.eql(1);
+  });
+});

@@ -203,6 +203,18 @@ Sweety allows to get just a raw array of selected elements:
 $('.class').toArray();
 ```
 
+### Extensions
+
+You can easily extend Sweety prototype by passing an object with your new methods on initialization:
+
+```js
+var $ = Sweety({
+  testFunc: function () {
+    return this.elements.length;
+  }
+});
+```
+
 # Tests
 
 Install Bower and run `bower install` to install Mocha and should.js. Then open `tests/test.html' in your browser.
