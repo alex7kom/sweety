@@ -305,15 +305,15 @@ function Sweety(){
             this.elements = [];
         },
 
-        on: function () {
+        on: function (eventName, cb) {
             this.forEach(function (elem) {
-                elem.addEventListener(event, cb, false);
+                elem.addEventListener(eventName, cb, false);
             });
             return this;
         },
-        off: function () {
+        off: function (eventName, cb) {
             this.forEach(function (elem) {
-                elem.removeEventListener(event, cb, false);
+                elem.removeEventListener(eventName, cb, false);
             });
             return this;
         },

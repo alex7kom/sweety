@@ -738,6 +738,63 @@ describe('Sweety', function (){
 
   });
 
+  describe('.on', function () {
+    beforeEach(function () {
+      var elem = document.createElement('div');
+      elem.id = 'sweety_test_child';
+      document.getElementById('sweety_test').appendChild(elem);
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should bind events', function (done) {
+      $('#sweety_test_child').on('click', function (e) {
+        e.should.be.ok;
+        done();
+      });
+      document.getElementById('sweety_test_child').dispatchEvent(new Event('click'));
+    });
+
+    it('should not crash on empty collection', function () {
+      $().on('click', function () {});
+    });
+
+  });
+
+  describe('.off', function () {
+    beforeEach(function () {
+      var elem = document.createElement('div');
+      elem.id = 'sweety_test_child';
+      document.getElementById('sweety_test').appendChild(elem);
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should unbind events', function (done) {
+      var testFunc = function (e) {
+        done(new Error('testFunc is binded'));
+      };
+      $('#sweety_test_child').on('click', testFunc);
+      $('#sweety_test_child').off('click', testFunc);
+      $('#sweety_test_child').on('click',function (e) {
+        e.should.be.ok;
+        done();
+      });
+      document.getElementById('sweety_test_child').dispatchEvent(new Event('click'));
+    });
+
+    it('should not crash on empty collection', function () {
+      var testFunc = function () {};
+      $().on('click', testFunc);
+      $().off('click', testFunc);
+    });
+
+  });
+
   describe('.toString', function () {
     it('should return [SweetyElement]', function () {
       $('<div id="sweety_test_child"></div>').toString().should.be.eql('[SweetyElement]');
