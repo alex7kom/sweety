@@ -1,3 +1,10 @@
+/*
+* Sweety.js v1.1.0
+* Small and simple DOM manipulation library
+* MIT License
+* Copyright (c) 2015 Alexey Komarov <alex7kom@gmail.com>
+*/
+
 function Sweety(extensions){
 
     var sweety = function(element){
