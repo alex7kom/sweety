@@ -186,7 +186,7 @@ function Sweety(extensions){
             return this.elements[0].hasAttribute(key);
         },
         attr: function (key, value) {
-            if (value) {
+            if (value != undefined || typeof key == 'object') {
                 this.setAttr(key, value);
                 return this;
             }
@@ -247,7 +247,7 @@ function Sweety(extensions){
         addStyle: function (style, styleValue) {
             this.forEach(function (elem) {
                 var styles = fn.getStyles(elem);
-                if (styleValue) {
+                if (styleValue != undefined) {
                     styles[style] = styleValue;
                 } else if (typeof style === 'object') {
                     fn.objEach(style, function (styleName, styleValue) {
