@@ -209,7 +209,7 @@ Sweety allows to get just a raw array of selected elements:
 $('.class').toArray();
 ```
 
-### Extensions
+## Extensions
 
 You can easily extend Sweety prototype by passing an object with your new methods on initialization:
 
