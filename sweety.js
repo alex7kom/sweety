@@ -325,6 +325,12 @@ function Sweety(extensions){
             return this;
         },
 
+        exists: function () {
+            if (this.elements.length === 0) {
+                return false;
+            }
+            return true;
+        },
         toString: function () {
             return '[SweetyElement]';
         }

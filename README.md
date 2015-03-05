@@ -197,6 +197,12 @@ $('#id').off('click', myFunc);
 
 ### Utility
 
+Check that Sweety element has any DOM elements:
+
+```js
+$('.class').exists();
+```
+
 Sweety allows to get just a raw array of selected elements:
 
 ```js

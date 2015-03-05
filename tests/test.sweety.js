@@ -795,6 +795,16 @@ describe('Sweety', function (){
 
   });
 
+  describe('.exists', function () {
+    it('should return true if it does contain elements', function () {
+      $('<div id="sweety_test_child"></div>').exists().should.be.true;
+    });
+
+    it('should return false if it doesn\'t contain any elements', function () {
+      $().exists().should.be.false;
+    });
+  });
+
   describe('.toString', function () {
     it('should return [SweetyElement]', function () {
       $('<div id="sweety_test_child"></div>').toString().should.be.eql('[SweetyElement]');
