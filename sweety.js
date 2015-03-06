@@ -145,6 +145,33 @@ function Sweety(extensions){
             return this;
         },
 
+        getProp: function (key) {
+            if (!this.elements[0]) {
+                return undefined;
+            }
+            return this.elements[0][key];
+        },
+        setProp: function (key, value) {
+            var properties = {};
+            if (typeof key == 'object') {
+                properties = key;
+            } else {
+                properties[key] = value;
+            }
+            this.forEach(function (elem) {
+                fn.objEach(properties, function (key, value) {
+                    elem[key] = value;
+                });
+            });
+            return this;
+        },
+        prop: function (key, value) {
+            if (value != undefined || typeof key == 'object') {
+                return this.setProp(key, value);
+            }
+            return this.getProp(key);
+        },
+
         getAttr: function (key) {
             if (!this.elements[0]) {
                 return null;

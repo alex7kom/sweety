@@ -73,6 +73,21 @@ $('#id').toggleClass('my-class').setAttr('my-attr', 'my-value');
 
 ## Manipulate
 
+### Properties
+
+Get and set properties:
+
+```js
+$('#id').getProp('myProp');
+$('#id').setProp('myProp', 'my value');
+$('#id').setProp({
+  'type': 'checkbox',
+  'checked': true
+});
+$('#id').prop('myProp'); // get property
+$('#id').prop('myProp', 'my value'); // set property
+```
+
 ### Attributes
 
 Get, set and remove attributes:

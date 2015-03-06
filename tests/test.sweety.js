@@ -131,6 +131,121 @@ describe('Sweety', function (){
 
   });
 
+  describe('.getProp', function () {
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return a value of given property', function () {
+      var input = '<input id="sweety_test_input" type="text" value="test-value">';
+      document.getElementById('sweety_test').innerHTML = input;
+      $('#sweety_test_input').getProp('value').should.be.eql('test-value');
+      $('#sweety_test_input').getProp('type').should.be.eql('text');
+    });
+
+    it('should return true if property checked exists', function () {
+      var input = '<input id="sweety_test_input" type="checkbox" checked="">';
+      document.getElementById('sweety_test').innerHTML = input;
+      $('#sweety_test_input').getProp('checked').should.be.true;
+    });
+
+    it('should return false if property checked does not exists', function () {
+      var input = '<input id="sweety_test_input" type="checkbox">';
+      document.getElementById('sweety_test').innerHTML = input;
+      $('#sweety_test_input').getProp('checked').should.be.false;
+    });
+
+    it('should return undefined if property does not exists', function () {
+      var input = '<input id="sweety_test_input">';
+      document.getElementById('sweety_test').innerHTML = input;
+      ($('#sweety_test_input').getProp('notexists') === undefined).should.be.true;
+    });
+
+    it('should return undefined if element does not exists', function () {
+      ($().getProp('notexists') === undefined).should.be.true;
+    });
+  });
+
+  describe('.setProp', function () {
+    beforeEach(function () {
+      var input = '<input id="sweety_test_input">';
+      document.getElementById('sweety_test').innerHTML = input;
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should set a given property and value from a pair', function () {
+      $('#sweety_test_input')
+        .setProp('value', 'test-value')
+        .setProp('type', 'text');
+      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
+      document.getElementById('sweety_test_input').type.should.be.eql('text');
+    });
+
+    it('should set a given property and value from an object', function () {
+      $('#sweety_test_input')
+        .setProp({
+          'value': 'test-value',
+          'type': 'text'
+        });
+      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
+      document.getElementById('sweety_test_input').type.should.be.eql('text');
+    });
+
+    it('should set a checked property', function () {
+      $('#sweety_test_input')
+        .setProp('type', 'checkbox')
+        .setProp('checked', true);
+      document.getElementById('sweety_test_input').checked.should.be.true;
+    });
+
+    it('should not crash on empty collection', function () {
+      $().setProp('type', 'checkbox');
+    });
+  });
+
+  describe('.prop', function () {
+    beforeEach(function () {
+      var input = '<input id="sweety_test_input">';
+      document.getElementById('sweety_test').innerHTML = input;
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return a value of given property', function () {
+      document.getElementById('sweety_test_input').type = 'text';
+      document.getElementById('sweety_test_input').value = 'test-value';
+      $('#sweety_test_input').prop('value').should.be.eql('test-value');
+      $('#sweety_test_input').prop('type').should.be.eql('text');
+    });
+
+    it('should set a given property and value from a pair', function () {
+      $('#sweety_test_input')
+        .prop('value', 'test-value')
+        .prop('type', 'text');
+      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
+      document.getElementById('sweety_test_input').type.should.be.eql('text');
+    });
+
+    it('should set a given property and value from an object', function () {
+      $('#sweety_test_input')
+        .prop({
+          'value': 'test-value',
+          'type': 'text'
+        });
+      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
+      document.getElementById('sweety_test_input').type.should.be.eql('text');
+    });
+
+    it('should not crash on empty collection', function () {
+      $().prop('type', 'checkbox');
+    });
+  });
+
   describe('.getAttr', function () {
 
     beforeEach(function () {
