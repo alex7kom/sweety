@@ -24,7 +24,7 @@ function Sweety(extensions){
         }
         this.elements = [];
         if (elem) {
-            if (typeof elem == 'object' && elem.length != undefined) {
+            if (typeof elem == 'object' && elem.length != undefined && elem.item != undefined) {
                 this.elements = Array.prototype.slice.call(elem);
             } else {
                 this.elements = [elem];
