@@ -24,7 +24,7 @@ function Sweety(extensions){
         }
         this.elements = [];
         if (elem) {
-            if (elem.toString() == '[object HTMLCollection]') {
+            if (typeof elem == 'object' && elem.length != undefined) {
                 this.elements = Array.prototype.slice.call(elem);
             } else {
                 this.elements = [elem];
