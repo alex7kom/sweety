@@ -219,7 +219,11 @@ function Sweety(extensions){
             }
             return this.getAttr(key);
         },
+
         val: function (value) {
+            if (this.prop('value') != undefined) {
+                return this.prop('value', value);
+            }
             return this.attr('value', value);
         },
 

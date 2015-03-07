@@ -389,12 +389,12 @@ describe('Sweety', function (){
 
   });
 
-  describe('.val', function () {
+  describe('.val with input element', function () {
 
     beforeEach(function () {
-      var elem = document.createElement('div');
+      var elem = document.createElement('input');
+      elem.type = 'text';
       elem.id = 'sweety_test_child';
-      elem.setAttribute('value', 'test-value');
       document.getElementById('sweety_test').appendChild(elem);
     });
 
@@ -402,7 +402,42 @@ describe('Sweety', function (){
       document.getElementById('sweety_test').innerHTML = '';
     });
 
-    it('should return a value with if value is not specified', function () {
+    it('should return a value if value set from property', function () {
+      document.getElementById('sweety_test_child').value = 'test-value';
+      $('#sweety_test_child').val().should.be.eql('test-value');
+    });
+
+    it('should return a value if value set from attribute', function () {
+      document.getElementById('sweety_test_child').setAttribute('value', 'test-value');
+      $('#sweety_test_child').val().should.be.eql('test-value');
+    });
+
+    it('should set a value if value is specified', function () {
+      $('#sweety_test_child').val('new-test-value').val()
+        .should.be.eql('new-test-value');
+    });
+
+  });
+
+  describe('.val with div element', function () {
+
+    beforeEach(function () {
+      var elem = document.createElement('div');
+      elem.id = 'sweety_test_child';
+      document.getElementById('sweety_test').appendChild(elem);
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return a value if value set from property', function () {
+      document.getElementById('sweety_test_child').value = 'test-value';
+      $('#sweety_test_child').val().should.be.eql('test-value');
+    });
+
+    it('should return a value if value set from attribute', function () {
+      document.getElementById('sweety_test_child').setAttribute('value', 'test-value');
       $('#sweety_test_child').val().should.be.eql('test-value');
     });
 

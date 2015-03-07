@@ -109,11 +109,18 @@ Check if the attribute exists (returns `true` or `false`):
 $('#id').hasAttr('my-attr');
 ```
 
-There are jQuery-like shortcuts:
+There is a shortcut:
 
 ```js
 $('#id').attr('my-attr'); // get attribute
 $('#id').attr('my-attr', 'my value'); // set attribute
+```
+
+### Input values
+
+Get and set input values:
+
+```js
 $('#id').val(); // get value
 $('#id').val('my value'); // set value
 ```
