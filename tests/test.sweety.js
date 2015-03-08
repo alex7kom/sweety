@@ -20,11 +20,11 @@ describe('Sweety', function (){
     });
 
     it('should select by id', function () {
-      $('#sweety_test').toArray().length.should.be.eql(1);
+      $('#sweety_test').toArray().should.have.lengthOf(1);
     });
 
     it('should select by class', function () {
-      $('.sweety-test').toArray().length.should.be.eql(1);
+      $('.sweety-test').toArray().should.have.lengthOf(1);
     });
 
     it('should select by tag', function () {
@@ -32,15 +32,15 @@ describe('Sweety', function (){
     });
 
     it('should create a DOM elements by html', function () {
-      $('<div>').toArray().length.should.be.eql(1);
+      $('<div>').toArray().should.have.lengthOf(1);
     });
 
     it('should select nothing by empty string', function () {
-      $('').toArray().length.should.be.eql(0);
+      $('').toArray().should.have.lengthOf(0);
     });
 
     it('should return empty collection without any params', function () {
-      $().toArray().length.should.be.eql(0);
+      $().toArray().should.have.lengthOf(0);
     });
 
   });
@@ -66,15 +66,15 @@ describe('Sweety', function (){
     });
 
     it('should return a child element by tag', function () {
-      $('#sweety_test').findChild('div').toArray().length.should.be.eql(1);
+      $('#sweety_test').findChild('div').toArray().should.have.lengthOf(1);
     });
 
     it('should return a child element by class', function () {
-      $('#sweety_test').findChild('.sweety-test-child').toArray().length.should.be.eql(1);
+      $('#sweety_test').findChild('.sweety-test-child').toArray().should.have.lengthOf(1);
     });
 
     it('should return empty collection on empty collection', function () {
-      $().findChild('.sweety-test-child').toArray().length.should.be.eql(0);
+      $().findChild('.sweety-test-child').toArray().should.have.lengthOf(0);
     });
 
   });
@@ -92,19 +92,19 @@ describe('Sweety', function (){
     });
 
     it('should return a parent element', function () {
-      $('#sweety_test_child').findParent().toArray().length.should.be.eql(1);
+      $('#sweety_test_child').findParent().toArray().should.have.lengthOf(1);
     });
 
     it('should return a parent element by tag', function () {
-      $('#sweety_test_child').findParent('div').toArray().length.should.be.eql(1);
+      $('#sweety_test_child').findParent('div').toArray().should.have.lengthOf(1);
     });
 
     it('should return a parent element by class', function () {
-      $('#sweety_test_child').findParent('.sweety-test').toArray().length.should.be.eql(1);
+      $('#sweety_test_child').findParent('.sweety-test').toArray().should.have.lengthOf(1);
     });
 
     it('should return empty collection on empty collection', function () {
-      $().findParent('.sweety-test').toArray().length.should.be.eql(0);
+      $().findParent('.sweety-test').toArray().should.have.lengthOf(0);
     });
 
   });
@@ -122,11 +122,11 @@ describe('Sweety', function (){
     });
 
     it('should return a parent element', function () {
-      $('#sweety_test_child').parent().toArray().length.should.be.eql(1);
+      $('#sweety_test_child').parent().toArray().should.have.lengthOf(1);
     });
 
     it('should return empty collection on empty collection', function () {
-      $().parent().toArray().length.should.be.eql(0);
+      $().parent().toArray().should.have.lengthOf(0);
     });
 
   });
@@ -852,7 +852,7 @@ describe('Sweety', function (){
 
     it('should append elements', function () {
       $('#sweety_test').append($('<div id="sweety_test_child"></div>'));
-      $('#sweety_test_child').toArray().length.should.be.eql(1);
+      $('#sweety_test_child').toArray().should.have.lengthOf(1);
     });
 
     it('should not crash on empty collection', function () {
@@ -879,7 +879,7 @@ describe('Sweety', function (){
 
     it('should remove elements', function () {
       $('#sweety_test_child').remove();
-      $('#sweety_test_child').toArray().length.should.be.eql(0);
+      $('#sweety_test_child').toArray().should.have.lengthOf(0);
     });
 
     it('should not crash on empty collection', function () {
