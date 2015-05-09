@@ -737,12 +737,14 @@ describe('Sweety', function (){
 
     it('should set styles from object', function () {
       $.fn.saveStyles($('#sweety_test_child').toArray()[0], { color: 'black' });
-      document.getElementById('sweety_test_child').style.cssText.should.be.eql('color: black;');
+      document.getElementById('sweety_test_child').style.color
+        .should.be.eql('black');
     });
 
     it('should set blank styles from a blank object', function () {
       $.fn.saveStyles($('#sweety_test_child').toArray()[0], {});
-      document.getElementById('sweety_test_child').style.cssText.should.be.eql('');
+      document.getElementById('sweety_test_child').style.cssText
+        .should.be.eql('');
     });
 
   });
@@ -752,7 +754,7 @@ describe('Sweety', function (){
     beforeEach(function () {
       var elem = document.createElement('div');
       elem.id = 'sweety_test_child';
-      elem.style.cssText = 'color: black;';
+      elem.style.cssText = 'color:black';
       document.getElementById('sweety_test').appendChild(elem);
     });
 
@@ -762,8 +764,8 @@ describe('Sweety', function (){
 
     it('should add styles from arguments', function () {
       $('#sweety_test_child').addStyle('text-align', 'right');
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('color: black; text-align: right;');
+      document.getElementById('sweety_test_child').style.textAlign
+        .should.be.eql('right');
     });
 
     it('should add styles from an object', function () {
@@ -771,16 +773,19 @@ describe('Sweety', function (){
         'text-align': 'right',
         'text-decoration': 'none'
       });
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('color: black; text-align: right; text-decoration: none;');
+      document.getElementById('sweety_test_child').style.textAlign
+        .should.be.eql('right');
+      document.getElementById('sweety_test_child').style.textDecoration
+        .should.be.eql('none');
     });
 
     it('should not duplicate styles when adding', function () {
+      var prevCssText = document.getElementById('sweety_test_child').style.cssText;
       $('#sweety_test_child').addStyle({
         color: 'black'
       });
       document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('color: black;');
+        .should.be.eql(prevCssText);
     });
 
     it('should not crash on empty collection', function () {
@@ -807,8 +812,8 @@ describe('Sweety', function (){
 
     it('should remove styles from arguments', function () {
       $('#sweety_test_child').removeStyle('color');
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('text-align: right;');
+      document.getElementById('sweety_test_child').style.color
+        .should.be.eql('');
     });
 
     it('should remove styles from a list', function () {
@@ -829,7 +834,7 @@ describe('Sweety', function (){
     beforeEach(function () {
       var elem = document.createElement('div');
       elem.id = 'sweety_test_child';
-      elem.style.cssText = 'color: black;';
+      elem.style.cssText = 'color:black';
       document.getElementById('sweety_test').appendChild(elem);
     });
 
@@ -839,8 +844,8 @@ describe('Sweety', function (){
 
     it('should add styles from arguments', function () {
       $('#sweety_test_child').css('text-align', 'right');
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('color: black; text-align: right;');
+      document.getElementById('sweety_test_child').style.textAlign
+        .should.be.eql('right');
     });
 
     it('should add styles from an object', function () {
@@ -848,16 +853,19 @@ describe('Sweety', function (){
         'text-align': 'right',
         'text-decoration': 'none'
       });
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('color: black; text-align: right; text-decoration: none;');
+      document.getElementById('sweety_test_child').style.textAlign
+        .should.be.eql('right');
+      document.getElementById('sweety_test_child').style.textDecoration
+        .should.be.eql('none');
     });
 
     it('should not duplicate styles when adding', function () {
+      var prevCssText = document.getElementById('sweety_test_child').style.cssText;
       $('#sweety_test_child').css({
         color: 'black'
       });
       document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('color: black;');
+        .should.be.eql(prevCssText);
     });
 
   });
@@ -978,7 +986,7 @@ describe('Sweety', function (){
         e.should.be.ok;
         done();
       });
-      document.getElementById('sweety_test_child').dispatchEvent(new Event('click'));
+      document.getElementById('sweety_test_child').click();
     });
 
     it('should not crash on empty collection', function () {
@@ -1008,7 +1016,7 @@ describe('Sweety', function (){
         e.should.be.ok;
         done();
       });
-      document.getElementById('sweety_test_child').dispatchEvent(new Event('click'));
+      document.getElementById('sweety_test_child').click();
     });
 
     it('should not crash on empty collection', function () {
@@ -1045,7 +1053,7 @@ describe('Extensions', function () {
   });
 
   it('testFunc should return collection length', function () {
-    $().testFunc().should.be.eql(0);
-    $('<div></div>').testFunc().should.be.eql(1);
+    ($().testFunc() === 0).should.be.true;
+    ($('<div></div>').testFunc() === 1).should.be.true;
   });
 });
