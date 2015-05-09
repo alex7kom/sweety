@@ -23,9 +23,17 @@ function Sweety(extensions){
             elem = element;
         }
         this.elements = [];
+        var type = Object.prototype.toString.call(elem);
         if (elem) {
-            if (typeof elem == 'object' && elem.length != undefined && elem.item != undefined) {
+            if (
+                type === '[object HTMLCollection]' ||
+                type === '[object NodeList]'
+            ) {
                 this.elements = Array.prototype.slice.call(elem);
+            } else if (
+                elem.toString() === '[SweetyElement]'
+            ) {
+                this.elements = elem.elements;
             } else {
                 this.elements = [elem];
             }

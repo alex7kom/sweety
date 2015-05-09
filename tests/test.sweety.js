@@ -35,6 +35,18 @@ describe('Sweety', function (){
       $('<div>').toArray().should.have.lengthOf(1);
     });
 
+    it('should properly handle window', function () {
+      $(window).toArray()[0].toString().should.be.eql(window.toString());
+    });
+
+    it('should properly handle document', function () {
+      $(document).toArray()[0].should.be.eql(document);
+    });
+
+    it('should properly handle SweetyElement', function () {
+      $($(document)).toArray()[0].should.be.eql(document);
+    });
+
     it('should select nothing by empty string', function () {
       $('').toArray().should.have.lengthOf(0);
     });
