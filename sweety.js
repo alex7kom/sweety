@@ -229,6 +229,32 @@ function Sweety(extensions){
         },
 
         val: function (value) {
+            if (this.elements[0] &&
+                this.elements[0].tagName == 'SELECT' &&
+                this.elements[0].multiple
+            ) {
+                if (value != undefined) {
+                    if (typeof value === 'string') {
+                        value = value.split(' ');
+                    }
+                    this.findChild('option').forEach(function (elem) {
+                        if (fn.contains(value, elem.value)) {
+                            elem.selected = true;
+                        } else {
+                            elem.selected = false;
+                        }
+                    });
+                    return this;
+                } else {
+                    var result = [];
+                    this.findChild('option').forEach(function (elem) {
+                        if (elem.selected) {
+                            result.push(elem.value);
+                        }
+                    });
+                    return result.length > 0 ? result : null;
+                }
+            }
             if (this.prop('value') != undefined) {
                 return this.prop('value', value);
             }

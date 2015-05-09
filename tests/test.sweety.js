@@ -431,6 +431,68 @@ describe('Sweety', function (){
 
   });
 
+  describe('.val with select element', function () {
+
+    beforeEach(function () {
+      document.getElementById('sweety_test').innerHTML = '<select id="sweety_test_child"><option value="value-1" selected="">Value 1</option><option value="value-2">Value 2</option></select>';
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return selected value', function () {
+      $('#sweety_test_child').val().should.be.eql('value-1');
+    });
+
+    it('should return value set using property', function () {
+      document.getElementById('sweety_test_child').value = 'value-2';
+      $('#sweety_test_child').val().should.be.eql('value-2');
+    });
+
+    it('should change and return value', function () {
+      $('#sweety_test_child').val('value-2').val().should.be.eql('value-2');
+    });
+
+  });
+
+  describe('.val with multiple select element', function () {
+
+    beforeEach(function () {
+      document.getElementById('sweety_test').innerHTML = '<select id="sweety_test_child" multiple=""><option value="value-1" selected="">Value 1</option><option value="value-2">Value 2</option><option value="value-3">Value 3</option></select>';
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return selected value', function () {
+      $('#sweety_test_child').val().should.be.eql(['value-1']);
+    });
+
+    it('should return value set using property', function () {
+      document.getElementById('sweety_test_child').value = 'value-2';
+      $('#sweety_test_child').val().should.be.eql(['value-2']);
+    });
+
+    it('should change value on string', function () {
+      $('#sweety_test_child').val('value-2 value-3').val().should.be.eql(['value-2', 'value-3']);
+    });
+
+    it('should change value on array', function () {
+      $('#sweety_test_child').val(['value-2', 'value-3']).val().should.be.eql(['value-2', 'value-3']);
+    });
+
+    it('should deselect all on empty string', function () {
+      ($('#sweety_test_child').val('').val() === null).should.be.true;
+    });
+
+    it('should deselect all on empty array', function () {
+      ($('#sweety_test_child').val([]).val() === null).should.be.true;
+    });
+
+  });
+
   describe('.val with div element', function () {
 
     beforeEach(function () {
