@@ -13,13 +13,13 @@ function Sweety(extensions){
 
     var SweetyElement = function(element) {
         var elem;
-        if (typeof element == 'string' && element.length > 0) {
-            if (element.substr(0, 1) == '<') {
+        if (typeof element === 'string' && element.length > 0) {
+            if (element.substr(0, 1) === '<') {
                 elem = fn.create(element);
             } else {
                 elem = fn.find(document, element);
             }
-        } else if (typeof element == 'object' && element !== null) {
+        } else if (typeof element === 'object' && element !== null) {
             elem = element;
         }
         this.elements = [];
@@ -78,12 +78,12 @@ function Sweety(extensions){
             }
         },
 
-        contains: function (arr, item) {
-            return arr.indexOf(item) !== -1;
+        contains: function (subject, search) {
+            return subject.indexOf(search) !== -1;
         },
 
         getClasses: function (elem) {
-            if (elem.className == '') {
+            if (elem.className === '') {
                 return [];
             }
             return elem.className.split(/\s+/);
@@ -134,7 +134,7 @@ function Sweety(extensions){
             if (!selector) {
                 return this.parent();
             }
-            if (selector.substr(0,1) == '.') {
+            if (selector.substr(0,1) === '.') {
                 while( (elem = elem.parentElement) && !fn.contains(fn.getClasses(elem), selector.substr(1)) );
             } else {
                 while( (elem = elem.parentElement) && !(elem.tagName.toUpperCase() == selector.toUpperCase()));
@@ -161,7 +161,7 @@ function Sweety(extensions){
         },
         setProp: function (key, value) {
             var properties = {};
-            if (typeof key == 'object') {
+            if (typeof key === 'object') {
                 properties = key;
             } else {
                 properties[key] = value;
@@ -174,7 +174,7 @@ function Sweety(extensions){
             return this;
         },
         prop: function (key, value) {
-            if (value != undefined || typeof key == 'object') {
+            if (value != undefined || typeof key === 'object') {
                 return this.setProp(key, value);
             }
             return this.getProp(key);
@@ -188,7 +188,7 @@ function Sweety(extensions){
         },
         setAttr: function (key, value) {
             var attributes = {};
-            if (key.toString() == '[object Object]') {
+            if (key.toString() === '[object Object]') {
                 attributes = key;
             } else {
                 attributes[key] = value;
@@ -202,7 +202,7 @@ function Sweety(extensions){
         },
         removeAttr: function (key) {
             var attributes = [];
-            if (typeof key == 'object') {
+            if (typeof key === 'object') {
                 attributes = key;
             } else {
                 attributes.push(key);
@@ -221,7 +221,7 @@ function Sweety(extensions){
             return this.elements[0].hasAttribute(key);
         },
         attr: function (key, value) {
-            if (value != undefined || typeof key == 'object') {
+            if (value != undefined || typeof key === 'object') {
                 this.setAttr(key, value);
                 return this;
             }
@@ -298,7 +298,7 @@ function Sweety(extensions){
             return this;
         },
         removeStyle: function (style) {
-            if (typeof style == 'string') {
+            if (typeof style === 'string') {
                 style = [style];
             }
             this.forEach(function (elem) {
@@ -315,7 +315,7 @@ function Sweety(extensions){
         },
 
         html: function (html) {
-            if (html !== undefined) {
+            if (html != undefined) {
                 this.forEach(function (elem) {
                     elem.innerHTML = html;
                 });
@@ -378,7 +378,7 @@ function Sweety(extensions){
 
     if (typeof extensions == 'object') {
         fn.objEach(extensions, function (name, func) {
-            if (typeof func != 'function') {
+            if (typeof func !== 'function') {
                 return;
             }
             SweetyElement.prototype[name] = func;
