@@ -258,6 +258,30 @@ function Sweety(extensions){
                     return result.length > 0 ? result : null;
                 }
             }
+
+            if (this.elements[0] &&
+                this.elements[0].tagName == 'INPUT' &&
+                this.elements[0].type == 'radio') {
+                if (value != undefined) {
+                    this.forEach(function (elem) {
+                        if (elem.value == value) {
+                            elem.checked = true;
+                        } else {
+                            elem.checked = false;
+                        }
+                    });
+                    return this;
+                } else {
+                    var result = null;
+                    this.forEach(function (elem) {
+                        if (elem.checked) {
+                            result = elem.value;
+                        }
+                    });
+                    return result;
+                }
+            }
+
             if (this.prop('value') != undefined) {
                 return this.prop('value', value);
             }

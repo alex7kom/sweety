@@ -501,6 +501,28 @@ describe('Sweety', function (){
 
   });
 
+  describe('.val with radio buttons', function () {
+    beforeEach(function () {
+      document.getElementById('sweety_test').innerHTML = '<input type="radio" name="sweety_radio_button" value="value-1" checked=""><input type="radio" name="sweety_radio_button" value="value-2"><input type="radio" name="sweety_radio_button" value="value-3">';
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return a value of checked radio', function () {
+      $('@sweety_radio_button').val().should.be.eql('value-1');
+    });
+
+    it('should change value', function () {
+      $('@sweety_radio_button').val('value-2').val().should.be.eql('value-2');
+    });
+
+    it('should uncheck all on empty string', function () {
+      ($('@sweety_radio_button').val('').val() === null).should.be.true;
+    });
+  });
+
   describe('.val with div element', function () {
 
     beforeEach(function () {
