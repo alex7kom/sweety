@@ -58,6 +58,9 @@ function Sweety(extensions){
                 case '#':
                     elem = parent.getElementById(selector.substr(1));
                     break;
+                case '@':
+                    elem = parent.getElementsByName(selector.substr(1));
+                    break;
                 default:
                     elem = parent.getElementsByTagName(selector);
             }

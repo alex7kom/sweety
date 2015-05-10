@@ -27,6 +27,14 @@ describe('Sweety', function (){
       $('.sweety-test').toArray().should.have.lengthOf(1);
     });
 
+    it('should select by name', function () {
+      var elem = document.createElement('a');
+      elem.name = 'sweety_test_name';
+      document.body.appendChild(elem);
+
+      $('@sweety_test_name').toArray().should.have.lengthOf(1);
+    });
+
     it('should select by tag', function () {
       $('div').toArray().length.should.not.be.eql(0);
     });
