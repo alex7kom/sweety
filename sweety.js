@@ -5,7 +5,7 @@
 * Copyright (c) 2015 Alexey Komarov <alex7kom@gmail.com>
 */
 
-function Sweety(extensions){
+function Sweety(){
 
     var sweety = function(element){
         return new SweetyElement(element);
@@ -465,14 +465,16 @@ function Sweety(extensions){
 
     };
 
-    if (typeof extensions == 'object') {
-        fn.objEach(extensions, function (name, func) {
-            if (typeof func !== 'function') {
-                return;
-            }
-            SweetyElement.prototype[name] = func;
-        });
-    }
+    fn.each(arguments, function (extension) {
+        if (typeof extension == 'object') {
+            fn.objEach(extension, function (name, func) {
+                if (typeof func !== 'function') {
+                    return;
+                }
+                SweetyElement.prototype[name] = func;
+            });
+        }
+    });
 
     return sweety;
 }
