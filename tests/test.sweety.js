@@ -523,6 +523,37 @@ describe('Sweety', function (){
     });
   });
 
+  describe('.val with checkboxes', function () {
+    beforeEach(function () {
+      document.getElementById('sweety_test').innerHTML = '<input type="checkbox" name="sweety_checkbox" value="value-1" checked=""><input type="checkbox" name="sweety_checkbox" value="value-2"><input type="checkbox" name="sweety_checkbox" value="value-3">';
+    });
+
+    afterEach(function () {
+      document.getElementById('sweety_test').innerHTML = '';
+    });
+
+    it('should return a value of checked checkbox', function () {
+      $('@sweety_checkbox').val().should.be.eql(['value-1']);
+    });
+
+    it('should change value on string', function () {
+      $('@sweety_checkbox').val('value-2').val().should.be.eql(['value-2']);
+    });
+
+    it('should change value on array', function () {
+      $('@sweety_checkbox').val(['value-2', 'value-3']).val()
+        .should.be.eql(['value-2', 'value-3']);
+    });
+
+    it('should uncheck all on empty string', function () {
+      ($('@sweety_checkbox').val('').val() === null).should.be.true;
+    });
+
+    it('should uncheck all on empty array', function () {
+      ($('@sweety_checkbox').val([]).val() === null).should.be.true;
+    });
+  });
+
   describe('.val with div element', function () {
 
     beforeEach(function () {

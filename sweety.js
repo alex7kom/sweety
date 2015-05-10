@@ -282,6 +282,32 @@ function Sweety(extensions){
                 }
             }
 
+            if (this.elements[0] &&
+                this.elements[0].tagName == 'INPUT' &&
+                this.elements[0].type == 'checkbox') {
+                if (value != undefined) {
+                    if (typeof value === 'string') {
+                        value = value.split(' ');
+                    }
+                    this.forEach(function (elem) {
+                        if (fn.contains(value, elem.value)) {
+                            elem.checked = true;
+                        } else {
+                            elem.checked = false;
+                        }
+                    });
+                    return this;
+                } else {
+                    var result = [];
+                    this.forEach(function (elem) {
+                        if (elem.checked) {
+                            result.push(elem.value);
+                        }
+                    });
+                    return result.length > 0 ? result : null;
+                }
+            }
+
             if (this.prop('value') != undefined) {
                 return this.prop('value', value);
             }
