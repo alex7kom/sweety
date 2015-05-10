@@ -1042,8 +1042,16 @@ describe('Sweety', function (){
       document.getElementById('sweety_test').innerHTML = '';
     });
 
-    it('should bind events', function (done) {
+    it('should bind events by string', function (done) {
       $('#sweety_test_child').on('click', function (e) {
+        e.should.be.ok;
+        done();
+      });
+      document.getElementById('sweety_test_child').click();
+    });
+
+    it('should bind events by array', function (done) {
+      $('#sweety_test_child').on(['click'], function (e) {
         e.should.be.ok;
         done();
       });
@@ -1067,13 +1075,26 @@ describe('Sweety', function (){
       document.getElementById('sweety_test').innerHTML = '';
     });
 
-    it('should unbind events', function (done) {
+    it('should unbind events by string', function (done) {
       var testFunc = function (e) {
         done(new Error('testFunc is binded'));
       };
       $('#sweety_test_child').on('click', testFunc);
       $('#sweety_test_child').off('click', testFunc);
       $('#sweety_test_child').on('click',function (e) {
+        e.should.be.ok;
+        done();
+      });
+      document.getElementById('sweety_test_child').click();
+    });
+
+    it('should unbind events by array', function (done) {
+      var testFunc = function (e) {
+        done(new Error('testFunc is binded'));
+      };
+      $('#sweety_test_child').on(['click'], testFunc);
+      $('#sweety_test_child').off(['click'], testFunc);
+      $('#sweety_test_child').on(['click'],function (e) {
         e.should.be.ok;
         done();
       });

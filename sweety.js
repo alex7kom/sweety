@@ -430,16 +430,26 @@ function Sweety(extensions){
             this.elements = [];
         },
 
-        on: function (eventName, cb) {
-            this.forEach(function (elem) {
-                elem.addEventListener(eventName, cb, false);
-            });
+        on: function (events, cb) {
+            if (typeof events === 'string') {
+                events = events.split(' ');
+            }
+            fn.each(events, function (eventName) {
+                this.forEach(function (elem) {
+                    elem.addEventListener(eventName, cb, false);
+                });
+            }.bind(this));
             return this;
         },
-        off: function (eventName, cb) {
-            this.forEach(function (elem) {
-                elem.removeEventListener(eventName, cb, false);
-            });
+        off: function (events, cb) {
+            if (typeof events === 'string') {
+                events = events.split(' ');
+            }
+            fn.each(events, function (eventName) {
+                this.forEach(function (elem) {
+                    elem.removeEventListener(eventName, cb, false);
+                });
+            }.bind(this));
             return this;
         },
 
