@@ -35,6 +35,8 @@ $('#id');
 
 $('.class');
 
+$('@name');
+
 $('tag');
 ```
 
@@ -118,11 +120,27 @@ $('#id').attr('my-attr', 'my value'); // set attribute
 
 ### Input values
 
-Get and set input values:
+Get and set text `<input>` values:
 
 ```js
 $('#id').val(); // get value
 $('#id').val('my value'); // set value
+```
+
+Get and set `<select>` values:
+
+```js
+$('#id').val(); // get value
+$('#id').val('my value'); // set value
+$('#id').val(['value-1', 'value-2']); // set value for multiple select
+```
+
+Get and set radio and checkbox `<input>` values:
+
+```js
+$('@name').val(); // get value
+$('@name').val('my value'); // set value for radio
+$('@name').val(['value-1', 'value-2']); // set value for checkbox
 ```
 
 ### Classes
@@ -214,7 +232,9 @@ Bind and unbind events using `.on` and `.off` methods:
 
 ```js
 $('#id').on('click', myFunc);
+$(window).on('resize scroll', myFunc);
 $('#id').off('click', myFunc);
+$(window).off(['resize', 'scroll'], myFunc);
 ```
 
 ### Utility
@@ -233,7 +253,7 @@ $('.class').toArray();
 
 ## Extensions
 
-You can easily extend Sweety prototype by passing an object with your new methods on initialization:
+You can easily extend Sweety prototype by passing objects with your new methods as arguments on initialization:
 
 ```js
 var $ = Sweety({
