@@ -16,15 +16,15 @@ describe('Sweety', function (){
   describe('$', function (){
 
     it('should be initialized', function (){
-      $.should.be.ok;
+      expect($).to.be.ok;
     });
 
     it('should select by id', function () {
-      $('#sweety_test').toArray().should.have.lengthOf(1);
+      expect($('#sweety_test').toArray().length).to.be(1);
     });
 
     it('should select by class', function () {
-      $('.sweety-test').toArray().should.have.lengthOf(1);
+      expect($('.sweety-test').toArray().length).to.be(1);
     });
 
     it('should select by name', function () {
@@ -32,35 +32,35 @@ describe('Sweety', function (){
       elem.name = 'sweety_test_name';
       document.body.appendChild(elem);
 
-      $('@sweety_test_name').toArray().should.have.lengthOf(1);
+      expect($('@sweety_test_name').toArray().length).to.be(1);
     });
 
     it('should select by tag', function () {
-      $('div').toArray().length.should.not.be.eql(0);
+      expect($('div').toArray().length).to.not.be(0);
     });
 
     it('should create a DOM elements by html', function () {
-      $('<div>').toArray().should.have.lengthOf(1);
+      expect($('<div>').toArray().length).to.be(1);
     });
 
     it('should properly handle window', function () {
-      $(window).toArray()[0].toString().should.be.eql(window.toString());
+      expect($(window).toArray()[0].toString()).to.be(window.toString());
     });
 
     it('should properly handle document', function () {
-      $(document).toArray()[0].should.be.eql(document);
+      expect($(document).toArray()[0]).to.be(document);
     });
 
     it('should properly handle SweetyElement', function () {
-      $($(document)).toArray()[0].should.be.eql(document);
+      expect($($(document)).toArray()[0]).to.be(document);
     });
 
     it('should select nothing by empty string', function () {
-      $('').toArray().should.have.lengthOf(0);
+      expect($('').toArray().length).to.be(0);
     });
 
     it('should return empty collection without any params', function () {
-      $().toArray().should.have.lengthOf(0);
+      expect($().toArray().length).to.be(0);
     });
 
   });
@@ -68,7 +68,7 @@ describe('Sweety', function (){
   describe('.toArray', function () {
 
     it('should return an Array', function () {
-      $('#sweety_test').toArray().should.be.an.Array;
+      expect($('#sweety_test').toArray()).to.be.an('array');
     });
 
   });
@@ -86,15 +86,15 @@ describe('Sweety', function (){
     });
 
     it('should return a child element by tag', function () {
-      $('#sweety_test').findChild('div').toArray().should.have.lengthOf(1);
+      expect($('#sweety_test').findChild('div').toArray().length).to.be(1);
     });
 
     it('should return a child element by class', function () {
-      $('#sweety_test').findChild('.sweety-test-child').toArray().should.have.lengthOf(1);
+      expect($('#sweety_test').findChild('.sweety-test-child').toArray().length).to.be(1);
     });
 
     it('should return empty collection on empty collection', function () {
-      $().findChild('.sweety-test-child').toArray().should.have.lengthOf(0);
+      expect($().findChild('.sweety-test-child').toArray().length).to.be(0);
     });
 
   });
@@ -112,19 +112,19 @@ describe('Sweety', function (){
     });
 
     it('should return a parent element', function () {
-      $('#sweety_test_child').findParent().toArray().should.have.lengthOf(1);
+      expect($('#sweety_test_child').findParent().toArray().length).to.be(1);
     });
 
     it('should return a parent element by tag', function () {
-      $('#sweety_test_child').findParent('div').toArray().should.have.lengthOf(1);
+      expect($('#sweety_test_child').findParent('div').toArray().length).to.be(1);
     });
 
     it('should return a parent element by class', function () {
-      $('#sweety_test_child').findParent('.sweety-test').toArray().should.have.lengthOf(1);
+      expect($('#sweety_test_child').findParent('.sweety-test').toArray().length).to.be(1);
     });
 
     it('should return empty collection on empty collection', function () {
-      $().findParent('.sweety-test').toArray().should.have.lengthOf(0);
+      expect($().findParent('.sweety-test').toArray().length).to.be(0);
     });
 
   });
@@ -142,11 +142,11 @@ describe('Sweety', function (){
     });
 
     it('should return a parent element', function () {
-      $('#sweety_test_child').parent().toArray().should.have.lengthOf(1);
+      expect($('#sweety_test_child').parent().toArray().length).to.be(1);
     });
 
     it('should return empty collection on empty collection', function () {
-      $().parent().toArray().should.have.lengthOf(0);
+      expect($().parent().toArray().length).to.be(0);
     });
 
   });
@@ -159,30 +159,30 @@ describe('Sweety', function (){
     it('should return a value of given property', function () {
       var input = '<input id="sweety_test_input" type="text" value="test-value">';
       document.getElementById('sweety_test').innerHTML = input;
-      $('#sweety_test_input').getProp('value').should.be.eql('test-value');
-      $('#sweety_test_input').getProp('type').should.be.eql('text');
+      expect($('#sweety_test_input').getProp('value')).to.be('test-value');
+      expect($('#sweety_test_input').getProp('type')).to.be('text');
     });
 
     it('should return true if property checked exists', function () {
       var input = '<input id="sweety_test_input" type="checkbox" checked="">';
       document.getElementById('sweety_test').innerHTML = input;
-      $('#sweety_test_input').getProp('checked').should.be.true;
+      expect($('#sweety_test_input').getProp('checked')).to.be(true);
     });
 
     it('should return false if property checked does not exists', function () {
       var input = '<input id="sweety_test_input" type="checkbox">';
       document.getElementById('sweety_test').innerHTML = input;
-      $('#sweety_test_input').getProp('checked').should.be.false;
+      expect($('#sweety_test_input').getProp('checked')).to.be(false);
     });
 
     it('should return undefined if property does not exists', function () {
       var input = '<input id="sweety_test_input">';
       document.getElementById('sweety_test').innerHTML = input;
-      ($('#sweety_test_input').getProp('notexists') === undefined).should.be.true;
+      expect($('#sweety_test_input').getProp('notexists') === undefined).to.be(true);
     });
 
     it('should return undefined if element does not exists', function () {
-      ($().getProp('notexists') === undefined).should.be.true;
+      expect($().getProp('notexists') === undefined).to.be(true);
     });
   });
 
@@ -200,8 +200,8 @@ describe('Sweety', function (){
       $('#sweety_test_input')
         .setProp('value', 'test-value')
         .setProp('type', 'text');
-      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
-      document.getElementById('sweety_test_input').type.should.be.eql('text');
+      expect(document.getElementById('sweety_test_input').value).to.be('test-value');
+      expect(document.getElementById('sweety_test_input').type).to.be('text');
     });
 
     it('should set a given property and value from an object', function () {
@@ -210,15 +210,15 @@ describe('Sweety', function (){
           'value': 'test-value',
           'type': 'text'
         });
-      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
-      document.getElementById('sweety_test_input').type.should.be.eql('text');
+      expect(document.getElementById('sweety_test_input').value).to.be('test-value');
+      expect(document.getElementById('sweety_test_input').type).to.be('text');
     });
 
     it('should set a checked property', function () {
       $('#sweety_test_input')
         .setProp('type', 'checkbox')
         .setProp('checked', true);
-      document.getElementById('sweety_test_input').checked.should.be.true;
+      expect(document.getElementById('sweety_test_input').checked).to.be(true);
     });
 
     it('should not crash on empty collection', function () {
@@ -239,16 +239,16 @@ describe('Sweety', function (){
     it('should return a value of given property', function () {
       document.getElementById('sweety_test_input').type = 'text';
       document.getElementById('sweety_test_input').value = 'test-value';
-      $('#sweety_test_input').prop('value').should.be.eql('test-value');
-      $('#sweety_test_input').prop('type').should.be.eql('text');
+      expect($('#sweety_test_input').prop('value')).to.be('test-value');
+      expect($('#sweety_test_input').prop('type')).to.be('text');
     });
 
     it('should set a given property and value from a pair', function () {
       $('#sweety_test_input')
         .prop('value', 'test-value')
         .prop('type', 'text');
-      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
-      document.getElementById('sweety_test_input').type.should.be.eql('text');
+      expect(document.getElementById('sweety_test_input').value).to.be('test-value');
+      expect(document.getElementById('sweety_test_input').type).to.be('text');
     });
 
     it('should set a given property and value from an object', function () {
@@ -257,8 +257,8 @@ describe('Sweety', function (){
           'value': 'test-value',
           'type': 'text'
         });
-      document.getElementById('sweety_test_input').value.should.be.eql('test-value');
-      document.getElementById('sweety_test_input').type.should.be.eql('text');
+      expect(document.getElementById('sweety_test_input').value).to.be('test-value');
+      expect(document.getElementById('sweety_test_input').type).to.be('text');
     });
 
     it('should not crash on empty collection', function () {
@@ -280,15 +280,15 @@ describe('Sweety', function (){
     });
 
     it('should return a value of given attr', function () {
-      $('#sweety_test_child').getAttr('test-attr').should.be.eql('test-value');
+      expect($('#sweety_test_child').getAttr('test-attr')).to.be('test-value');
     });
 
     it('should return null if attr does not exists', function () {
-      ($('#sweety_test_child').getAttr('test-attr-2') === null).should.be.true;
+      expect($('#sweety_test_child').getAttr('test-attr-2') === null).to.be(true);
     });
 
     it('should return null if element does not exist', function () {
-      ($().getAttr('test-attr') === null).should.be.true;
+      expect($().getAttr('test-attr') === null).to.be(true);
     });
 
   });
@@ -306,17 +306,17 @@ describe('Sweety', function (){
     });
 
     it('should set a given attr and value from a pair of strings', function () {
-      $('#sweety_test_child')
+      expect($('#sweety_test_child')
         .setAttr('test-attr', 'test-value')
-        .getAttr('test-attr').should.be.eql('test-value');
+        .getAttr('test-attr')).to.be('test-value');
     });
 
     it('should set a given attr and value from an object', function () {
-      $('#sweety_test_child')
+      expect($('#sweety_test_child')
         .setAttr({
           'test-attr': 'test-value'
         })
-        .getAttr('test-attr').should.be.eql('test-value');
+        .getAttr('test-attr')).to.be('test-value');
     });
 
     it('should not crash on empty collection', function () {
@@ -342,11 +342,11 @@ describe('Sweety', function (){
     });
 
     it('should remove a given attr by name from a string', function () {
-      ($('#sweety_test_child').removeAttr('test-attr').getAttr('test-attr') === null).should.be.true;
+      expect($('#sweety_test_child').removeAttr('test-attr').getAttr('test-attr') === null).to.be(true);
     });
 
     it('should remove a given attr by list of names from an array', function () {
-      ($('#sweety_test_child').removeAttr(['test-attr']).getAttr('test-attr') === null).should.be.true;
+      expect($('#sweety_test_child').removeAttr(['test-attr']).getAttr('test-attr') === null).to.be(true);
     });
 
     it('should not crash on empty collection', function () {
@@ -370,15 +370,15 @@ describe('Sweety', function (){
     });
 
     it('should return true if attr exists', function () {
-      $('#sweety_test_child').hasAttr('test-attr').should.be.true;
+      expect($('#sweety_test_child').hasAttr('test-attr')).to.be(true);
     });
 
     it('should return false if attr doesn\'t exist', function () {
-      $('#sweety_test_child').hasAttr('not-exist').should.be.false;
+      expect($('#sweety_test_child').hasAttr('not-exist')).to.be(false);
     });
 
     it('should return false if element does not exist', function () {
-      $().hasAttr('test-attr').should.be.false;
+      expect($().hasAttr('test-attr')).to.be(false);
     });
 
   });
@@ -397,14 +397,14 @@ describe('Sweety', function (){
     });
 
     it('should return a value with if only key is specified', function () {
-      $('#sweety_test_child').attr('test-attr').should.be.eql('test-value');
+      expect($('#sweety_test_child').attr('test-attr')).to.be('test-value');
     });
 
     it('should set a value if both key and value is specified', function () {
-      $('#sweety_test_child')
+      expect($('#sweety_test_child')
         .attr('test-attr', 'new-test-value')
         .attr('test-attr')
-        .should.be.eql('new-test-value');
+        ).to.be('new-test-value');
     });
 
   });
@@ -424,17 +424,17 @@ describe('Sweety', function (){
 
     it('should return a value if value set from property', function () {
       document.getElementById('sweety_test_child').value = 'test-value';
-      $('#sweety_test_child').val().should.be.eql('test-value');
+      expect($('#sweety_test_child').val()).to.be('test-value');
     });
 
     it('should return a value if value set from attribute', function () {
       document.getElementById('sweety_test_child').setAttribute('value', 'test-value');
-      $('#sweety_test_child').val().should.be.eql('test-value');
+      expect($('#sweety_test_child').val()).to.be('test-value');
     });
 
     it('should set a value if value is specified', function () {
-      $('#sweety_test_child').val('new-test-value').val()
-        .should.be.eql('new-test-value');
+      expect($('#sweety_test_child').val('new-test-value').val()
+        ).to.be('new-test-value');
     });
 
   });
@@ -450,16 +450,16 @@ describe('Sweety', function (){
     });
 
     it('should return selected value', function () {
-      $('#sweety_test_child').val().should.be.eql('value-1');
+      expect($('#sweety_test_child').val()).to.be('value-1');
     });
 
     it('should return value set using property', function () {
       document.getElementById('sweety_test_child').value = 'value-2';
-      $('#sweety_test_child').val().should.be.eql('value-2');
+      expect($('#sweety_test_child').val()).to.be('value-2');
     });
 
     it('should change and return value', function () {
-      $('#sweety_test_child').val('value-2').val().should.be.eql('value-2');
+      expect($('#sweety_test_child').val('value-2').val()).to.be('value-2');
     });
 
   });
@@ -475,28 +475,28 @@ describe('Sweety', function (){
     });
 
     it('should return selected value', function () {
-      $('#sweety_test_child').val().should.be.eql(['value-1']);
+      expect($('#sweety_test_child').val()).to.eql(['value-1']);
     });
 
     it('should return value set using property', function () {
       document.getElementById('sweety_test_child').value = 'value-2';
-      $('#sweety_test_child').val().should.be.eql(['value-2']);
+      expect($('#sweety_test_child').val()).to.eql(['value-2']);
     });
 
     it('should change value on string', function () {
-      $('#sweety_test_child').val('value-2 value-3').val().should.be.eql(['value-2', 'value-3']);
+      expect($('#sweety_test_child').val('value-2 value-3').val()).to.eql(['value-2', 'value-3']);
     });
 
     it('should change value on array', function () {
-      $('#sweety_test_child').val(['value-2', 'value-3']).val().should.be.eql(['value-2', 'value-3']);
+      expect($('#sweety_test_child').val(['value-2', 'value-3']).val()).to.eql(['value-2', 'value-3']);
     });
 
     it('should deselect all on empty string', function () {
-      ($('#sweety_test_child').val('').val() === null).should.be.true;
+      expect($('#sweety_test_child').val('').val() === null).to.be(true);
     });
 
     it('should deselect all on empty array', function () {
-      ($('#sweety_test_child').val([]).val() === null).should.be.true;
+      expect($('#sweety_test_child').val([]).val() === null).to.be(true);
     });
 
   });
@@ -511,15 +511,15 @@ describe('Sweety', function (){
     });
 
     it('should return a value of checked radio', function () {
-      $('@sweety_radio_button').val().should.be.eql('value-1');
+      expect($('@sweety_radio_button').val()).to.be('value-1');
     });
 
     it('should change value', function () {
-      $('@sweety_radio_button').val('value-2').val().should.be.eql('value-2');
+      expect($('@sweety_radio_button').val('value-2').val()).to.be('value-2');
     });
 
     it('should uncheck all on empty string', function () {
-      ($('@sweety_radio_button').val('').val() === null).should.be.true;
+      expect($('@sweety_radio_button').val('').val() === null).to.be(true);
     });
   });
 
@@ -533,24 +533,24 @@ describe('Sweety', function (){
     });
 
     it('should return a value of checked checkbox', function () {
-      $('@sweety_checkbox').val().should.be.eql(['value-1']);
+      expect($('@sweety_checkbox').val()).to.eql(['value-1']);
     });
 
     it('should change value on string', function () {
-      $('@sweety_checkbox').val('value-2').val().should.be.eql(['value-2']);
+      expect($('@sweety_checkbox').val('value-2').val()).to.eql(['value-2']);
     });
 
     it('should change value on array', function () {
-      $('@sweety_checkbox').val(['value-2', 'value-3']).val()
-        .should.be.eql(['value-2', 'value-3']);
+      expect($('@sweety_checkbox').val(['value-2', 'value-3']).val()
+        ).to.eql(['value-2', 'value-3']);
     });
 
     it('should uncheck all on empty string', function () {
-      ($('@sweety_checkbox').val('').val() === null).should.be.true;
+      expect($('@sweety_checkbox').val('').val() === null).to.be(true);
     });
 
     it('should uncheck all on empty array', function () {
-      ($('@sweety_checkbox').val([]).val() === null).should.be.true;
+      expect($('@sweety_checkbox').val([]).val() === null).to.be(true);
     });
   });
 
@@ -568,17 +568,17 @@ describe('Sweety', function (){
 
     it('should return a value if value set from property', function () {
       document.getElementById('sweety_test_child').value = 'test-value';
-      $('#sweety_test_child').val().should.be.eql('test-value');
+      expect($('#sweety_test_child').val()).to.be('test-value');
     });
 
     it('should return a value if value set from attribute', function () {
       document.getElementById('sweety_test_child').setAttribute('value', 'test-value');
-      $('#sweety_test_child').val().should.be.eql('test-value');
+      expect($('#sweety_test_child').val()).to.be('test-value');
     });
 
     it('should set a value if value is specified', function () {
-      $('#sweety_test_child').val('new-test-value').val()
-        .should.be.eql('new-test-value');
+      expect($('#sweety_test_child').val('new-test-value').val()
+        ).to.be('new-test-value');
     });
 
   });
@@ -600,13 +600,13 @@ describe('Sweety', function (){
     });
 
     it('should return an array of classes', function () {
-      $.fn.getClasses($('#sweety_test_child').toArray()[0])
-        .should.be.eql(['class-1', 'class-2', 'class-3']);
+      expect($.fn.getClasses($('#sweety_test_child').toArray()[0])
+        ).to.eql(['class-1', 'class-2', 'class-3']);
     });
 
     it('should return a blank array if no class is specified', function () {
-      $.fn.getClasses($('#sweety_test_child2').toArray()[0])
-        .should.be.eql([]);
+      expect($.fn.getClasses($('#sweety_test_child2').toArray()[0])
+        ).to.eql([]);
     });
 
   });
@@ -625,12 +625,12 @@ describe('Sweety', function (){
 
     it('should set class from array', function () {
       $.fn.saveClasses($('#sweety_test_child').toArray()[0], ['class-1', 'class-2', 'class-3']);
-      $('#sweety_test_child').attr('class').should.be.eql('class-1 class-2 class-3');
+      expect($('#sweety_test_child').attr('class')).to.be('class-1 class-2 class-3');
     });
 
     it('should set blank class from a blank array', function () {
       $.fn.saveClasses($('#sweety_test_child').toArray()[0], []);
-      $('#sweety_test_child').attr('class').should.be.eql('');
+      expect($('#sweety_test_child').attr('class')).to.be('');
     });
 
   });
@@ -649,23 +649,23 @@ describe('Sweety', function (){
     });
 
     it('should add class from a string', function () {
-      $.fn.getClasses($('#sweety_test_child').addClass('class-3').toArray()[0])
-        .should.be.eql(['class-1', 'class-2', 'class-3']);
+      expect($.fn.getClasses($('#sweety_test_child').addClass('class-3').toArray()[0])
+        ).to.eql(['class-1', 'class-2', 'class-3']);
     });
 
     it('should add multiple classes from a string', function () {
-      $.fn.getClasses($('#sweety_test_child').addClass('class-3 class-4').toArray()[0])
-        .should.be.eql(['class-1', 'class-2', 'class-3', 'class-4']);
+      expect($.fn.getClasses($('#sweety_test_child').addClass('class-3 class-4').toArray()[0])
+        ).to.eql(['class-1', 'class-2', 'class-3', 'class-4']);
     });
 
     it('should add classes from a list', function () {
-      $.fn.getClasses($('#sweety_test_child').addClass(['class-3', 'class-4']).toArray()[0])
-        .should.be.eql(['class-1', 'class-2', 'class-3', 'class-4']);
+      expect($.fn.getClasses($('#sweety_test_child').addClass(['class-3', 'class-4']).toArray()[0])
+        ).to.eql(['class-1', 'class-2', 'class-3', 'class-4']);
     });
 
     it('should not duplicate classes when adding', function () {
-      $.fn.getClasses($('#sweety_test_child').addClass(['class-1', 'class-2']).toArray()[0])
-        .should.be.eql(['class-1', 'class-2']);
+      expect($.fn.getClasses($('#sweety_test_child').addClass(['class-1', 'class-2']).toArray()[0])
+        ).to.eql(['class-1', 'class-2']);
     });
 
     it('should not crash on empty collection', function () {
@@ -689,18 +689,18 @@ describe('Sweety', function (){
     });
 
     it('should remove class from a string', function () {
-      $.fn.getClasses($('#sweety_test_child').removeClass('class-2').toArray()[0])
-        .should.be.eql(['class-1']);
+      expect($.fn.getClasses($('#sweety_test_child').removeClass('class-2').toArray()[0])
+        ).to.eql(['class-1']);
     });
 
     it('should remove multiple classes from a string', function () {
-      $.fn.getClasses($('#sweety_test_child').removeClass('class-1 class-2').toArray()[0])
-        .should.be.eql([]);
+      expect($.fn.getClasses($('#sweety_test_child').removeClass('class-1 class-2').toArray()[0])
+        ).to.eql([]);
     });
 
     it('should remove classes from a list', function () {
-      $.fn.getClasses($('#sweety_test_child').removeClass(['class-1', 'class-2']).toArray()[0])
-        .should.be.eql([]);
+      expect($.fn.getClasses($('#sweety_test_child').removeClass(['class-1', 'class-2']).toArray()[0])
+        ).to.eql([]);
     });
 
     it('should not crash on empty collection', function () {
@@ -724,15 +724,15 @@ describe('Sweety', function (){
     });
 
     it('should return true if first element has a given class', function () {
-      $('#sweety_test_child').hasClass('class-2').should.be.true;
+      expect($('#sweety_test_child').hasClass('class-2')).to.be(true);
     });
 
     it('should return false if first element doesn\'t have a given class', function () {
-      $('#sweety_test_child').hasClass('no-such-class').should.be.false;
+      expect($('#sweety_test_child').hasClass('no-such-class')).to.be(false);
     });
 
     it('should return false if element does not exist', function () {
-      $().hasClass('class-2').should.be.false;
+      expect($().hasClass('class-2')).to.be(false);
     });
 
   });
@@ -750,8 +750,8 @@ describe('Sweety', function (){
     });
 
     it('should toggle a given class on element', function () {
-      $('#sweety_test_child').toggleClass('new-class').hasClass('new-class').should.be.true;
-      $('#sweety_test_child').toggleClass('new-class').hasClass('new-class').should.be.false;
+      expect($('#sweety_test_child').toggleClass('new-class').hasClass('new-class')).to.be(true);
+      expect($('#sweety_test_child').toggleClass('new-class').hasClass('new-class')).to.be(false);
     });
 
   });
@@ -773,13 +773,13 @@ describe('Sweety', function (){
     });
 
     it('should return an object of CSS styles', function () {
-      $.fn.getStyles($('#sweety_test_child').toArray()[0])
-        .should.be.eql({ color: 'black' });
+      expect($.fn.getStyles($('#sweety_test_child').toArray()[0])
+        ).to.eql({ color: 'black' });
     });
 
     it('should return a blank object if no style is specified', function () {
-      $.fn.getStyles($('#sweety_test_child2').toArray()[0])
-        .should.be.eql({});
+      expect($.fn.getStyles($('#sweety_test_child2').toArray()[0])
+        ).to.eql({});
     });
 
   });
@@ -798,14 +798,14 @@ describe('Sweety', function (){
 
     it('should set styles from object', function () {
       $.fn.saveStyles($('#sweety_test_child').toArray()[0], { color: 'black' });
-      document.getElementById('sweety_test_child').style.color
-        .should.be.eql('black');
+      expect(document.getElementById('sweety_test_child').style.color
+        ).to.be('black');
     });
 
     it('should set blank styles from a blank object', function () {
       $.fn.saveStyles($('#sweety_test_child').toArray()[0], {});
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('');
+      expect(document.getElementById('sweety_test_child').style.cssText
+        ).to.be('');
     });
 
   });
@@ -825,8 +825,8 @@ describe('Sweety', function (){
 
     it('should add styles from arguments', function () {
       $('#sweety_test_child').addStyle('text-align', 'right');
-      document.getElementById('sweety_test_child').style.textAlign
-        .should.be.eql('right');
+      expect(document.getElementById('sweety_test_child').style.textAlign
+        ).to.be('right');
     });
 
     it('should add styles from an object', function () {
@@ -834,10 +834,10 @@ describe('Sweety', function (){
         'text-align': 'right',
         'text-decoration': 'none'
       });
-      document.getElementById('sweety_test_child').style.textAlign
-        .should.be.eql('right');
-      document.getElementById('sweety_test_child').style.textDecoration
-        .should.be.eql('none');
+      expect(document.getElementById('sweety_test_child').style.textAlign
+        ).to.be('right');
+      expect(document.getElementById('sweety_test_child').style.textDecoration
+        ).to.be('none');
     });
 
     it('should not duplicate styles when adding', function () {
@@ -845,8 +845,8 @@ describe('Sweety', function (){
       $('#sweety_test_child').addStyle({
         color: 'black'
       });
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql(prevCssText);
+      expect(document.getElementById('sweety_test_child').style.cssText
+        ).to.be(prevCssText);
     });
 
     it('should not crash on empty collection', function () {
@@ -873,14 +873,14 @@ describe('Sweety', function (){
 
     it('should remove styles from arguments', function () {
       $('#sweety_test_child').removeStyle('color');
-      document.getElementById('sweety_test_child').style.color
-        .should.be.eql('');
+      expect(document.getElementById('sweety_test_child').style.color
+        ).to.be('');
     });
 
     it('should remove styles from a list', function () {
       $('#sweety_test_child').removeStyle(['color', 'text-align']);
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql('');
+      expect(document.getElementById('sweety_test_child').style.cssText
+        ).to.be('');
     });
 
     it('should not crash on empty collection', function () {
@@ -905,8 +905,8 @@ describe('Sweety', function (){
 
     it('should add styles from arguments', function () {
       $('#sweety_test_child').css('text-align', 'right');
-      document.getElementById('sweety_test_child').style.textAlign
-        .should.be.eql('right');
+      expect(document.getElementById('sweety_test_child').style.textAlign
+        ).to.be('right');
     });
 
     it('should add styles from an object', function () {
@@ -914,10 +914,10 @@ describe('Sweety', function (){
         'text-align': 'right',
         'text-decoration': 'none'
       });
-      document.getElementById('sweety_test_child').style.textAlign
-        .should.be.eql('right');
-      document.getElementById('sweety_test_child').style.textDecoration
-        .should.be.eql('none');
+      expect(document.getElementById('sweety_test_child').style.textAlign
+        ).to.be('right');
+      expect(document.getElementById('sweety_test_child').style.textDecoration
+        ).to.be('none');
     });
 
     it('should not duplicate styles when adding', function () {
@@ -925,8 +925,8 @@ describe('Sweety', function (){
       $('#sweety_test_child').css({
         color: 'black'
       });
-      document.getElementById('sweety_test_child').style.cssText
-        .should.be.eql(prevCssText);
+      expect(document.getElementById('sweety_test_child').style.cssText
+        ).to.be(prevCssText);
     });
 
   });
@@ -944,16 +944,16 @@ describe('Sweety', function (){
     });
 
     it('should return inner HTML if no arguments are provided', function () {
-      $('#sweety_test')
+      expect($('#sweety_test')
         .html()
-        .should.be.eql('<div id="sweety_test_child"></div>');
+        ).to.be('<div id="sweety_test_child"></div>');
     });
 
     it('should set inner HTML if string is provided', function () {
-      $('#sweety_test')
+      expect($('#sweety_test')
         .html('<div id="sweety_test_child_2"></div>')
         .html()
-        .should.be.eql('<div id="sweety_test_child_2"></div>');
+        ).to.be('<div id="sweety_test_child_2"></div>');
     });
 
     it('setter should not crash on empty collection', function () {
@@ -961,7 +961,7 @@ describe('Sweety', function (){
     });
 
     it('getter should return undefined on empty collection', function () {
-      ($().html() === undefined).should.be.true;
+      expect($().html() === undefined).to.be(true);
     });
 
   });
@@ -979,10 +979,10 @@ describe('Sweety', function (){
     });
 
     it('should empty inner HTML', function () {
-      $('#sweety_test')
+      expect($('#sweety_test')
         .empty()
         .html()
-        .should.be.eql('');
+        ).to.be('');
     });
 
   });
@@ -995,7 +995,7 @@ describe('Sweety', function (){
 
     it('should append elements', function () {
       $('#sweety_test').append($('<div id="sweety_test_child"></div>'));
-      $('#sweety_test_child').toArray().should.have.lengthOf(1);
+      expect($('#sweety_test_child').toArray().length).to.be(1);
     });
 
     it('should not crash on empty collection', function () {
@@ -1022,7 +1022,7 @@ describe('Sweety', function (){
 
     it('should remove elements', function () {
       $('#sweety_test_child').remove();
-      $('#sweety_test_child').toArray().should.have.lengthOf(0);
+      expect($('#sweety_test_child').toArray().length).to.be(0);
     });
 
     it('should not crash on empty collection', function () {
@@ -1044,7 +1044,7 @@ describe('Sweety', function (){
 
     it('should bind events by string', function (done) {
       $('#sweety_test_child').on('click', function (e) {
-        e.should.be.ok;
+        expect(e).to.be.ok();
         done();
       });
       document.getElementById('sweety_test_child').click();
@@ -1052,7 +1052,7 @@ describe('Sweety', function (){
 
     it('should bind events by array', function (done) {
       $('#sweety_test_child').on(['click'], function (e) {
-        e.should.be.ok;
+        expect(e).to.be.ok();
         done();
       });
       document.getElementById('sweety_test_child').click();
@@ -1082,7 +1082,7 @@ describe('Sweety', function (){
       $('#sweety_test_child').on('click', testFunc);
       $('#sweety_test_child').off('click', testFunc);
       $('#sweety_test_child').on('click',function (e) {
-        e.should.be.ok;
+        expect(e).to.be.ok();
         done();
       });
       document.getElementById('sweety_test_child').click();
@@ -1095,7 +1095,7 @@ describe('Sweety', function (){
       $('#sweety_test_child').on(['click'], testFunc);
       $('#sweety_test_child').off(['click'], testFunc);
       $('#sweety_test_child').on(['click'],function (e) {
-        e.should.be.ok;
+        expect(e).to.be.ok();
         done();
       });
       document.getElementById('sweety_test_child').click();
@@ -1111,17 +1111,17 @@ describe('Sweety', function (){
 
   describe('.exists', function () {
     it('should return true if it does contain elements', function () {
-      $('<div id="sweety_test_child"></div>').exists().should.be.true;
+      expect($('<div id="sweety_test_child"></div>').exists()).to.be(true);
     });
 
     it('should return false if it doesn\'t contain any elements', function () {
-      $().exists().should.be.false;
+      expect($().exists()).to.be(false);
     });
   });
 
   describe('.toString', function () {
     it('should return [SweetyElement]', function () {
-      $('<div id="sweety_test_child"></div>').toString().should.be.eql('[SweetyElement]');
+      expect($('<div id="sweety_test_child"></div>').toString()).to.be('[SweetyElement]');
     });
   });
 
@@ -1135,7 +1135,7 @@ describe('Extensions', function () {
   });
 
   it('testFunc should return collection length', function () {
-    ($().testFunc() === 0).should.be.true;
-    ($('<div></div>').testFunc() === 1).should.be.true;
+    expect($().testFunc() === 0).to.be(true);
+    expect($('<div></div>').testFunc() === 1).to.be(true);
   });
 });

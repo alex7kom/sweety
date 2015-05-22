@@ -265,7 +265,7 @@ var $ = Sweety({
 
 # Tests
 
-Install Bower and run `bower install` to install Mocha and should.js. Then open `tests/test.html' in your browser.
+Install Bower and run `bower install` to install Mocha and expect.js. Then open `tests/test.html' in your browser.
 
 # License
 
