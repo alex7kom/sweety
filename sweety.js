@@ -1,5 +1,5 @@
 /*
-* Sweety.js v1.4.0
+* Sweety.js v1.4.1
 * Small and simple DOM manipulation library
 * MIT License
 * Copyright (c) 2015 Alexey Komarov <alex7kom@gmail.com>
