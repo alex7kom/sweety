@@ -51,6 +51,10 @@ describe('Sweety', function (){
       expect($(document).toArray()[0]).to.be(document);
     });
 
+    it('should properly handle Array', function () {
+      expect($([document]).toArray()[0]).to.be(document);
+    });
+
     it('should properly handle SweetyElement', function () {
       expect($($(document)).toArray()[0]).to.be(document);
     });

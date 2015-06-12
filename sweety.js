@@ -31,6 +31,10 @@ function Sweety(){
             ) {
                 this.elements = Array.prototype.slice.call(elem);
             } else if (
+                type === '[object Array]'
+            ) {
+                this.elements = elem;
+            } else if (
                 elem.toString() === '[SweetyElement]'
             ) {
                 this.elements = elem.elements;
