@@ -399,9 +399,11 @@ function Sweety(){
 
         html: function (html) {
             if (html != undefined) {
-                this.forEach(function (elem) {
-                    elem.innerHTML = html;
-                });
+                this
+                    .empty()
+                    .forEach(function (elem) {
+                        elem.innerHTML = html;
+                    });
                 return this;
             }
             if (!this.elements[0]) {
@@ -410,7 +412,11 @@ function Sweety(){
             return this.elements[0].innerHTML;
         },
         empty: function () {
-            this.html('');
+            this.forEach(function (elem) {
+                while (elem.firstChild) {
+                    elem.removeChild(elem.firstChild);
+                }
+            });
             return this;
         },
 
