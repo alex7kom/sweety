@@ -1,4 +1,4 @@
-# Sweety.js
+# Sweety
 
 Small and simple DOM manipulation library. It is only a ~2KB when minimized and gzipped!
 
@@ -8,13 +8,13 @@ __Note__ that it is __not__ a drop-in replacement for jQuery or any other librar
 
 # Installation
 
-Download [the latest version](https://github.com/Alex7Kom/sweety/releases/latest) from Github or use Bower:
+Download [the latest version](https://github.com/Alex7Kom/sweety/releases/latest) from Github or use npm or Bower:
 
 ```
-bower install sweety
+npm install sweety
 ```
 
-Then just include `sweety.js` or `sweety.min.js` in your html.
+Then just include `dist/sweety.js` or `dist/sweety.min.js` in your html. AMD-version of the library that also supports Browserify also available as `dist/sweety-amd.js`/`dist/sweety-amd.min.js`.
 
 # Use
 
@@ -265,7 +265,7 @@ var $ = Sweety({
 
 # Tests
 
-Install Bower and run `bower install` to install Mocha and expect.js. Then open `tests/test.html' in your browser.
+Install Node.js and run `npm install` to install Mocha and expect.js. Then open `tests/test.html' in your browser.
 
 # License
 
