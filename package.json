@@ -1,0 +1,31 @@
+{
+  "name": "sweety",
+  "version": "1.4.2",
+  "description": "Small and simple DOM manipulation library",
+  "main": "dist/sweety-amd.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://alex7kom@github.com/Alex7Kom/sweety.git"
+  },
+  "keywords": [
+    "browser",
+    "DOM"
+  ],
+  "author": "Alexey Komarov <alex7kom@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alex7Kom/sweety/issues"
+  },
+  "homepage": "https://github.com/Alex7Kom/sweety",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-clone": "^1.0.0",
+    "gulp-header": "^1.7.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-umd": "^0.2.0"
+  }
+}

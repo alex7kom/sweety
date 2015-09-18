@@ -1,3 +1,10 @@
+/**
+ * sweety - Small and simple DOM manipulation library
+ * @version v1.4.2
+ * @author Alexey Komarov <alex7kom@gmail.com>
+ * @link https://github.com/Alex7Kom/sweety
+ * @license MIT
+ */
 function Sweety(){
 
     var sweety = function(element){
