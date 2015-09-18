@@ -1,6 +1,6 @@
 /**
  * sweety - Small and simple DOM manipulation library
- * @version v1.4.2
+ * @version v1.4.3
  * @author Alexey Komarov <alex7kom@gmail.com>
  * @link https://github.com/Alex7Kom/sweety
  * @license MIT
