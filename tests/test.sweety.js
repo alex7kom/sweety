@@ -116,15 +116,18 @@ describe('Sweety', function (){
     });
 
     it('should return a parent element', function () {
-      expect($('#sweety_test_child').findParent().toArray().length).to.be(1);
+      expect($('#sweety_test_child').findParent()
+        .hasClass('sweety-test')).to.be(true);
     });
 
     it('should return a parent element by tag', function () {
-      expect($('#sweety_test_child').findParent('div').toArray().length).to.be(1);
+      expect($('#sweety_test_child').findParent('div')
+        .hasClass('sweety-test')).to.be(true);
     });
 
     it('should return a parent element by class', function () {
-      expect($('#sweety_test_child').findParent('.sweety-test').toArray().length).to.be(1);
+      expect($('#sweety_test_child').findParent('.sweety-test')
+        .hasClass('sweety-test')).to.be(true);
     });
 
     it('should return empty collection on empty collection', function () {
