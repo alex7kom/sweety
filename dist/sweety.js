@@ -1,13 +1,13 @@
 /**
  * sweety - Small and simple DOM manipulation library
- * @version v1.4.3
+ * @version v1.4.4
  * @author Alexey Komarov <alex7kom@gmail.com>
  * @link https://github.com/Alex7Kom/sweety
  * @license MIT
  */
-function Sweety(){
+function Sweety() {
 
-    var sweety = function(element){
+    var sweety = function(element) {
         return new SweetyElement(element);
     };
 
@@ -142,9 +142,17 @@ function Sweety(){
                 return this.parent();
             }
             if (selector.substr(0,1) === '.') {
-                while( (elem = elem.parentElement) && !fn.contains(fn.getClasses(elem), selector.substr(1)) );
+                do {
+                    elem = elem.parentElement;
+                } while (
+                    !fn.contains(fn.getClasses(elem), selector.substr(1))
+                );
             } else {
-                while( (elem = elem.parentElement) && !(elem.tagName.toUpperCase() == selector.toUpperCase()));
+                do {
+                    elem = elem.parentElement;
+                } while (
+                    !(elem.tagName.toUpperCase() === selector.toUpperCase())
+                );
             }
             return sweety(elem);
         },
@@ -155,7 +163,7 @@ function Sweety(){
             return sweety(this.elements[0].parentElement);
         },
 
-        forEach: function(cb) {
+        forEach: function (cb) {
             fn.each(this.elements, cb);
             return this;
         },
@@ -181,7 +189,10 @@ function Sweety(){
             return this;
         },
         prop: function (key, value) {
-            if (value != undefined || typeof key === 'object') {
+            if (
+                typeof value !== 'undefined'
+                || typeof key === 'object'
+            ) {
                 return this.setProp(key, value);
             }
             return this.getProp(key);
@@ -228,7 +239,10 @@ function Sweety(){
             return this.elements[0].hasAttribute(key);
         },
         attr: function (key, value) {
-            if (value != undefined || typeof key === 'object') {
+            if (
+                typeof value !== 'undefined'
+                || typeof key === 'object'
+            ) {
                 this.setAttr(key, value);
                 return this;
             }
@@ -236,11 +250,12 @@ function Sweety(){
         },
 
         val: function (value) {
+            var result;
             if (this.elements[0] &&
-                this.elements[0].tagName == 'SELECT' &&
+                this.elements[0].tagName === 'SELECT' &&
                 this.elements[0].multiple
             ) {
-                if (value != undefined) {
+                if (typeof value !== 'undefined') {
                     if (typeof value === 'string') {
                         value = value.split(' ');
                     }
@@ -253,7 +268,7 @@ function Sweety(){
                     });
                     return this;
                 } else {
-                    var result = [];
+                    result = [];
                     this.findChild('option').forEach(function (elem) {
                         if (elem.selected) {
                             result.push(elem.value);
@@ -264,11 +279,11 @@ function Sweety(){
             }
 
             if (this.elements[0] &&
-                this.elements[0].tagName == 'INPUT' &&
-                this.elements[0].type == 'radio') {
-                if (value != undefined) {
+                this.elements[0].tagName === 'INPUT' &&
+                this.elements[0].type === 'radio') {
+                if (typeof value !== 'undefined') {
                     this.forEach(function (elem) {
-                        if (elem.value == value) {
+                        if (elem.value === value) {
                             elem.checked = true;
                         } else {
                             elem.checked = false;
@@ -276,7 +291,7 @@ function Sweety(){
                     });
                     return this;
                 } else {
-                    var result = null;
+                    result = null;
                     this.forEach(function (elem) {
                         if (elem.checked) {
                             result = elem.value;
@@ -287,9 +302,9 @@ function Sweety(){
             }
 
             if (this.elements[0] &&
-                this.elements[0].tagName == 'INPUT' &&
-                this.elements[0].type == 'checkbox') {
-                if (value != undefined) {
+                this.elements[0].tagName === 'INPUT' &&
+                this.elements[0].type === 'checkbox') {
+                if (typeof value !== 'undefined') {
                     if (typeof value === 'string') {
                         value = value.split(' ');
                     }
@@ -302,7 +317,7 @@ function Sweety(){
                     });
                     return this;
                 } else {
-                    var result = [];
+                    result = [];
                     this.forEach(function (elem) {
                         if (elem.checked) {
                             result.push(elem.value);
@@ -312,14 +327,14 @@ function Sweety(){
                 }
             }
 
-            if (this.prop('value') != undefined) {
+            if (typeof this.prop('value') !== 'undefined') {
                 return this.prop('value', value);
             }
             return this.attr('value', value);
         },
 
         addClass: function (classes) {
-            if (typeof classes == 'string') {
+            if (typeof classes === 'string') {
                 classes = classes.split(/\s+/);
             }
 
@@ -335,7 +350,7 @@ function Sweety(){
             return this;
         },
         removeClass: function (classes) {
-            if (typeof classes == 'string') {
+            if (typeof classes === 'string') {
                 classes = classes.split(/\s+/);
             }
 
@@ -369,7 +384,7 @@ function Sweety(){
         addStyle: function (style, styleValue) {
             this.forEach(function (elem) {
                 var styles = fn.getStyles(elem);
-                if (styleValue != undefined) {
+                if (typeof styleValue !== 'undefined') {
                     styles[style] = styleValue;
                 } else if (typeof style === 'object') {
                     fn.objEach(style, function (styleName, styleValue) {
@@ -398,7 +413,7 @@ function Sweety(){
         },
 
         html: function (html) {
-            if (html != undefined) {
+            if (typeof html !== 'undefined') {
                 this
                     .empty()
                     .forEach(function (elem) {
@@ -476,7 +491,7 @@ function Sweety(){
     };
 
     fn.each(arguments, function (extension) {
-        if (typeof extension == 'object') {
+        if (typeof extension === 'object') {
             fn.objEach(extension, function (name, func) {
                 if (typeof func !== 'function') {
                     return;

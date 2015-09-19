@@ -1,7 +1,7 @@
 {
   "name": "sweety",
   "main": "dist/sweety-amd.min.js",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "authors": [
     "Alexey Komarov <alex7kom@gmail.com>"
   ],

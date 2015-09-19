@@ -1,6 +1,6 @@
 {
   "name": "sweety",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Small and simple DOM manipulation library",
   "main": "dist/sweety-amd.js",
   "directories": {
