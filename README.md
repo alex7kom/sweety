@@ -235,6 +235,8 @@ $('#id').on('click', myFunc);
 $(window).on('resize scroll', myFunc);
 $('#id').off('click', myFunc);
 $(window).off(['resize', 'scroll'], myFunc);
+$('#id').off('click'); // only for events binded with .on()
+$(window).off(['resize', 'scroll']); // only for events binded with .on()
 ```
 
 ### Utility

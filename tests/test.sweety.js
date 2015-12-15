@@ -1108,6 +1108,32 @@ describe('Sweety', function (){
       document.getElementById('sweety_test_child').click();
     });
 
+    it('should unbind all handlers by event string', function (done) {
+      var testFunc = function (e) {
+        done(new Error('testFunc is binded'));
+      };
+      $('#sweety_test_child').on('click', testFunc);
+      $('#sweety_test_child').off('click');
+      $('#sweety_test_child').on('click',function (e) {
+        expect(e).to.be.ok();
+        done();
+      });
+      document.getElementById('sweety_test_child').click();
+    });
+
+    it('should unbind all handlers by event array', function (done) {
+      var testFunc = function (e) {
+        done(new Error('testFunc is binded'));
+      };
+      $('#sweety_test_child').on(['click'], testFunc);
+      $('#sweety_test_child').off(['click']);
+      $('#sweety_test_child').on(['click'],function (e) {
+        expect(e).to.be.ok();
+        done();
+      });
+      document.getElementById('sweety_test_child').click();
+    });
+
     it('should not crash on empty collection', function () {
       var testFunc = function () {};
       $().on('click', testFunc);
