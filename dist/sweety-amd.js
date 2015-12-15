@@ -1,6 +1,6 @@
 /**
  * sweety - Small and simple DOM manipulation library
- * @version v1.4.4
+ * @version v1.5.0
  * @author Alexey Komarov <alex7kom@gmail.com>
  * @link https://github.com/Alex7Kom/sweety
  * @license MIT
@@ -471,6 +471,10 @@ function Sweety() {
             fn.each(events, function (eventName) {
                 this.forEach(function (elem) {
                     elem.addEventListener(eventName, cb, false);
+                    elem.sweetyEvents = elem.sweetyEvents || {};
+                    elem.sweetyEvents[eventName] =
+                        elem.sweetyEvents[eventName] || [];
+                    elem.sweetyEvents[eventName].push(cb);
                 });
             }.bind(this));
             return this;
@@ -481,7 +485,17 @@ function Sweety() {
             }
             fn.each(events, function (eventName) {
                 this.forEach(function (elem) {
-                    elem.removeEventListener(eventName, cb, false);
+                    if (cb) {
+                        elem.removeEventListener(eventName, cb, false);
+                    } else if (
+                        elem.sweetyEvents
+                        && elem.sweetyEvents[eventName]
+                    ) {
+                        elem.sweetyEvents[eventName].forEach(function (cb) {
+                            elem.removeEventListener(eventName, cb, false);
+                        });
+                        elem.sweetyEvents[eventName] = [];
+                    }
                 });
             }.bind(this));
             return this;
